@@ -16,8 +16,6 @@ export default class AntiTestportalPlus {
    
     constructor() {
         if (this._settingsBox.getSettingsValue('unlimitedTime_Module')) {
-            // clearInterval(2);
-            // ScriptBuilder.build("window.startTime = 99999999999;");
         }
         
         if(this._settingsBox.getSettingsValue('antiBlur_Module')) AntiBlur.turn(true);
@@ -25,17 +23,5 @@ export default class AntiTestportalPlus {
 
         console.clear();
         console.log('%cAntiTestportal+\nby: @Jason.json','color: #ff0; font-size: 20px;');
-
-        if(document.URL.includes('/exam/DoTestQuestion.html') || document.URL.includes('/exam/DoStartTest.html') || document.URL.includes('/exam/LoadQuestion.html')) {
-            const parent = document.querySelector('.question-area');
-
-            if (this._settingsBox.getSettingsValue('imageSearch_Module')) QuestionReader.readImage();
-            if (this._settingsBox.getSettingsValue('chatGPT_Module')) {
-                ChatGPT.turn(true);
-            }
-
-            console.log('Question: ', QuestionReader.readQuestionText());
-            QuestionReader.readAnswers();
-        }
     }
 }

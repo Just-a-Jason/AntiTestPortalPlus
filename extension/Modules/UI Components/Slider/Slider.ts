@@ -20,7 +20,7 @@ export default class Slider extends UIComponent {
   constructor(private _settingKey:string) {
     super();
 
-    if(localStorage.getItem(this._settingKey)) this._on = JSON.parse(localStorage.getItem(this._settingKey)!);
+    if (localStorage.getItem(this._settingKey)) this._on = JSON.parse(localStorage.getItem(this._settingKey)!);
     
     this.setState(this._on);
   }

@@ -1,9 +1,9 @@
 import ResponseWindow from "./UI/ResponseWindow/ResponseWindow";
-import ChatGPTError from "./UI/ChatGPTError/ChatGPTError";
-import DomInserter from "../DomInserter/DomInserter";
-import HtmlHelper from "../Helpers/HtmlHelper/HtmlHelper";
 import QuestionReader from "../QuestionReader/QuestionReader";
+import ChatGPTError from "./UI/ChatGPTError/ChatGPTError";
+import HtmlHelper from "../Helpers/HtmlHelper/HtmlHelper";
 import RetryButton from "./UI/RetryButton/RetryButton";
+import DomInserter from "../DomInserter/DomInserter";
 
 export default abstract class ChatGPT {
     private static _window: ResponseWindow | null = null;
