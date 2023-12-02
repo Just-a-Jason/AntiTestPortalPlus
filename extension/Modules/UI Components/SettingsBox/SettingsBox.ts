@@ -26,9 +26,10 @@ export default class SettingsBox extends UIComponent {
       widgetText.appendChild(image);
       widgetContainer.appendChild(widgetText);
 
-      widgetText.addEventListener('click', function () {
-        widgetMenu.style.display = (widgetMenu.style.display === 'none' || widgetMenu.style.display === '') ? 'block' : 'none';
+      widgetText.addEventListener('click', () => {
+        widgetMenu.classList.toggle('menuVisible');
       });
+      
       return widgetContainer;
   }
 
@@ -66,5 +67,3 @@ export default class SettingsBox extends UIComponent {
     else return JSON.parse(localStorage.getItem(key)!);
   }
 }
-
-/// function logToServer(b,a){if(window.console&&window.console.error){window.console.log("Sending js error to server: "+b);\nif(window.console.error){window.console.error(a)\n}}$.ajax({type:"POST",url:"/log/jsLogging",data:{location:window&&window.location&&window.location.href?window.location.href:"unknown",msg:b}})\n}

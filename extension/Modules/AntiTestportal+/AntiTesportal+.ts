@@ -19,6 +19,7 @@ export default class AntiTestportalPlus {
         }
         
         if(this._settingsBox.getSettingsValue('antiBlur_Module')) AntiBlur.turn(true);
+        if(this._settingsBox.getSettingsValue('chatGPT_Module')) ChatGPT.turn(true);
         if(this._settingsBox.getSettingsValue('questionSearch_Module')) QuestionSearch.turn(true);
 
         console.clear();

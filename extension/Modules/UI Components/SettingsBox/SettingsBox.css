@@ -1,4 +1,5 @@
 .SettingsBox {
+  box-shadow: 4px 4px 5px #888;
   background-color: #fafafa;
   border:solid 3px #e6e6e6;
   font-family: monospace;
@@ -29,17 +30,21 @@
 }
 
 
-
 #widget-menu {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   background-color: #fff;
   margin-bottom: 20px;
   border-radius: 5px;
+  transform: scale(0);
   position: absolute;
-  display: none;
+  transition: 0.2s;
   bottom: 100%; 
   z-index: 1; 
   right: 0;
+}
+
+#widget-menu.menuVisible {
+  transform: scale(1);
 }
 
 .menu-item {
