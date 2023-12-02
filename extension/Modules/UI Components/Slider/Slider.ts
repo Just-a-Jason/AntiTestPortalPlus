@@ -15,24 +15,36 @@ export default class Slider extends UIComponent {
     return sliderContainer;
   }
 
-  constructor(private _settingsKey:string) {
-      super();
+  constructor(private _settingKey:string) {
+    super();
+
+    if(localStorage.getItem(this._settingKey)) this._on = JSON.parse(localStorage.getItem(this._settingKey)!);
+    
+    this.setState(this._on);
   }
 
-  override _ready(): void {
+  override _ready(): void {    
     this._body.addEventListener('click', () => {
-         this.setState(!this._on);
-    });   
+      this.setState(!this._on);
+      this.setSettingState();
+    });
   }
 
   private setState(_state:boolean):void {
-    let state = (_state) ?  0 : 120;
+    let state = (_state) ?  120 : 0;
     
-    this._body.classList.toggle('on');
+    if(_state) this._body.classList.add('on');
+    else this._body.classList.remove('on');
     
     const sliderState = this._body.querySelector('.slider__set');
     
     if(sliderState) (sliderState as HTMLElement).style['transform'] = `translateX(${state}%)`;
     this._on = _state;
+  }
+
+  private setSettingState():void {
+    localStorage.setItem(this._settingKey, (this._on) ? 'true' : 'false');
+
+    this.setState(JSON.parse(localStorage.getItem(this._settingKey)!));
   }
 }

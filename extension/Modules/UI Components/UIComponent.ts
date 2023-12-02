@@ -1,5 +1,5 @@
-import DomInserter from "../DomInserter/DomInserter";
 import IUIElement from "../ChatGPT/Interfaces/IUIElement";
+import DomInserter from "../DomInserter/DomInserter";
 
 export default abstract class UIComponent implements IUIElement {
     protected _body;
@@ -8,6 +8,12 @@ export default abstract class UIComponent implements IUIElement {
         this._body = this._template();
         this._ready();
     }
+
+    appendChild(child: UIComponent | HTMLElement | IUIElement): void {
+        if(child instanceof UIComponent) this._body.appendChild(child._getBody());
+        else if(child instanceof HTMLElement) this._body.appendChild(child);
+    }
+
 
     /**
      * @description It's called once, when visal content of the component is destroyed.
