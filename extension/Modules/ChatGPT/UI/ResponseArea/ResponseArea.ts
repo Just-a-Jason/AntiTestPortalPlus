@@ -1,4 +1,4 @@
-import UIComponent from '../UIComponent';
+import UIComponent from '../../../UI Components/UIComponent';
 import './ResponseArea.css';
 
 export default class ResponseArea extends UIComponent {

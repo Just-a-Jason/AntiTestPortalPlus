@@ -1,0 +1,26 @@
+.slider {
+    width: 40px;
+    height: 20px;
+    background-color: #171717;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    cursor: pointer;
+    position: relative;
+}
+.slider .slider__set {
+    width: 15px;
+    height: 15px;
+    background-color: #fff;
+    border-radius: 50%;
+    margin-left: 2px;
+    position: absolute;
+}
+
+.slider, .slider__set {
+    transition: 0.3s;
+}
+.on {
+    background-color: #ff9d1c;
+}

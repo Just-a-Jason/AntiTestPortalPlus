@@ -1,0 +1,45 @@
+#widget-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #171717;
+  color: #fff;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-family: monospace;
+  font-size: 10px;
+  border-radius: 15px;
+  border:solid 3px #555;
+  z-index: 9999;
+}
+
+#widget-text {
+  font-weight: bold;
+}
+
+#widget-menu {
+  display: none;
+  position: absolute;
+  bottom: 100%; /* Updated to bottom */
+  right: 0;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  z-index: 1; /* Add this line to ensure the menu appears on top */
+  margin-bottom: 20px;
+}
+
+.menu-item {
+  color:#000;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  cursor: pointer;
+  min-width:100px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.menu-item:last-child {
+  border-bottom: none;
+}

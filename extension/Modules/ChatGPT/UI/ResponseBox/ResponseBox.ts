@@ -2,7 +2,7 @@ import HtmlHelper from "../../../Helpers/HtmlHelper/HtmlHelper";
 import QuestionReader from "../../../QuestionReader/QuestionReader";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 import ResponseArea from "../ResponseArea/ResponseArea";
-import UIComponent from "../UIComponent"; 
+import UIComponent from "../../../UI Components/UIComponent"; 
 import './ResponseBox.css';
 
 export default class ResponseBox extends UIComponent {

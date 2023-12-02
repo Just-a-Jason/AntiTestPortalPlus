@@ -1,4 +1,4 @@
-import UIComponent from "../UIComponent";
+import UIComponent from "../../../UI Components/UIComponent";
 import './LoadingSpinner.css';
 
 export default class Spinner extends UIComponent {
