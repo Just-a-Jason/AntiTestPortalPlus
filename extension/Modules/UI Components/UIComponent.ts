@@ -54,7 +54,7 @@ export default abstract class UIComponent implements IUIElement {
     }
     
     _ready(): void {
-        DomInserter.insertElement(this._body);
+        DomInserter.insert(this._body);
     }
 
     _template(): HTMLElement {

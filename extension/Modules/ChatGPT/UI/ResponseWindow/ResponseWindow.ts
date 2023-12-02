@@ -3,9 +3,9 @@ import QuestionReader from "../../../QuestionReader/QuestionReader";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 import ResponseArea from "../ResponseArea/ResponseArea";
 import UIComponent from "../../../UI Components/UIComponent"; 
-import './ResponseBox.css';
+import './ResponseWindow.css';
 
-export default class ResponseBox extends UIComponent {
+export default class ResponseWindow extends UIComponent {
     private _loadingSpinner: LoadingSpinner | null = null;
     private _responseBody: HTMLElement | null = null;
 
