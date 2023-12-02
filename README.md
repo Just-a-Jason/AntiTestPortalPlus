@@ -9,6 +9,6 @@
 ## What I have still to do?
 
 - [x] Build ChatGPT solver.
-- [] Upgrade UI.
-- [] Add anti-cheat blur.
-- [] (Optional) Add unlimited time and image search.
+- [ ] Upgrade UI.
+- [ ] Add anti-cheat blur.
+- [ ] (Optional) Add unlimited time and image search.
