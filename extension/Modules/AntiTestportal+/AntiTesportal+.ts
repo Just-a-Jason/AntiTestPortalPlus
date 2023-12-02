@@ -1,5 +1,6 @@
 import SettingsBox from "../UI Components/SettingsBox/SettingsBox";
 import QuestionReader  from "../QuestionReader/QuestionReader";
+import QuestionSearch from "../QuestionSearch/QuestionSearch";
 import ScriptBuilder from "../ScriptBuilder/ScriptBuilder";
 import ChatGPT from "../ChatGPT/ChatGPT";
 import AntiBlur from "../Blur/AntiBlur";
@@ -19,6 +20,7 @@ export default class AntiTestportalPlus {
         }
         
         if(this._settingsBox.getSettingsValue('antiBlur_Module')) AntiBlur.turn(true);
+        if(this._settingsBox.getSettingsValue('questionSearch_Module')) QuestionSearch.turn(true);
 
         console.clear();
         console.log('%cAntiTestportal+\nby: @Jason.json','color: #ff0; font-size: 20px;');

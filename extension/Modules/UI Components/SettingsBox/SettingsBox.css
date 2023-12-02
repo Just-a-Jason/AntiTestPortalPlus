@@ -2,7 +2,7 @@
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background-color: #171717;
+  background-color: #fafafa;
   color: #fff;
   padding: 10px;
   cursor: pointer;
@@ -10,12 +10,21 @@
   font-family: monospace;
   font-size: 10px;
   border-radius: 15px;
-  border:solid 3px #555;
+  border:solid 3px #e6e6e6;
   z-index: 9999;
+  transition: 0.2s;
 }
 
 #widget-text {
   font-weight: bold;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+#widget-container:hover {
+  background-color: #a6a6a6;
+  border: solid 3px #303030;
+
 }
 
 #widget-menu {
@@ -42,4 +51,8 @@
 
 .menu-item:last-child {
   border-bottom: none;
+}
+
+.SettingsBox__image {
+  width: 25px;
 }

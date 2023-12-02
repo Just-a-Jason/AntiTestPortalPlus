@@ -3,7 +3,7 @@ import UIComponent from "../UIComponent";
 import Slider from "../Slider/Slider";
 import './SettingsBox.css';
 
-type SettingKey = 'antiBlur_Module' | 'chatGPT_Module' | 'imageSearch_Module' | 'unlimitedTime_Module';
+type SettingKey = 'antiBlur_Module' | 'chatGPT_Module' | 'imageSearch_Module' | 'unlimitedTime_Module' | 'questionSearch_Module';
 
 export default class SettingsBox extends UIComponent {
 
@@ -18,7 +18,12 @@ export default class SettingsBox extends UIComponent {
 
       const widgetText = document.createElement('div');
       widgetText.id = 'widget-text';
-      widgetText.textContent = 'AntiTestportal+';
+
+      const image = document.createElement('img');
+      image.src = 'https://github.com/Just-a-Jason/AntiTestPortalPlus/blob/main/public/icons/antitestportal48.png?raw=true';
+      image.classList.add('SettingsBox__image');
+
+      widgetText.appendChild(image);
       widgetContainer.appendChild(widgetText);
 
       widgetText.addEventListener('click', function () {
@@ -32,14 +37,15 @@ export default class SettingsBox extends UIComponent {
   }
 
   private addSliders():void {
-    const menuItems = ['Anti Blur 🫧', 'chatGPT 🤖', 'Image Search 🖼️🔍', 'Unlimited Time ⌛'];
+    const menuItems = ['Anti Blur 🫧', 'chatGPT 🤖', 'Image Search 🖼️🔍', 'Unlimited Time ⌛', 'Question Search ❓🔍'];
     const menu = this._body.querySelector('#widget-menu');
     
     const _keys = new Map([
       ['antiBlur_Module', 'true'],
       ['chatGPT_Module', 'false'],
-      ['imageSearch_Module', 'true'],
-      ['unlimitedTime_Module', 'false']
+      ['imageSearch_Module', 'false'],
+      ['unlimitedTime_Module', 'false'],
+      ['questionSearch_Module', 'true']
     ]);
 
     let idx = 0;
