@@ -1,0 +1,60 @@
+:root {
+    --shadow: 2px 2px 10px #000;
+}
+body {
+    font-family: system-ui;
+    background: #222;
+    height: 400px;
+    width: 400px;
+    margin: 0;
+}
+
+header {
+    border-bottom: solid 2px #680a72;
+    box-shadow: var(--shadow);
+    justify-content: space-around;
+    align-items: center;
+    background: #555;
+    display: flex;
+    height: 50px;
+}
+
+header p {
+    color: #161516;
+    font-size: 25px;
+}
+
+header img {
+    width: 40px;
+    height: 40px;
+}
+
+footer {
+    border-top: solid 2px #680a72;
+    box-shadow: var(--shadow);
+    text-align: center;
+    background: #555;
+    padding: 10px;
+    color: #fff;
+}
+
+section.options {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    height: 300px;
+    width: 100%;
+}
+
+section.options img {
+    height: 100px;
+    width: 100px;
+    transition: 0.3s;
+}
+
+section.options img:hover {
+    filter: drop-shadow(2px 2px 20px #ffffff8e);
+    cursor: pointer;
+    height: 200px;
+    width: 200px;
+}

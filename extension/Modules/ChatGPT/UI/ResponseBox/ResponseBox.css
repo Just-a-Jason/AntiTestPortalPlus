@@ -1,0 +1,73 @@
+.ChatGPTResponse {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 250px;
+    max-height: 400px;
+    background-color: #171717;
+    font-family: monospace;
+    border-radius: 20px 20px 0px 0px ;
+    box-shadow: 2px 2px 15px #000;
+}
+
+.ChatGPTResponse__Body * {
+    margin: 0px;
+}
+
+.ChatGPTResponse__Image {
+    height: 20px;
+    width: 20px;
+    animation: spin 4s infinite;
+}
+
+.ChatGPTResponse__Header {
+    background-color: #222;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    border-radius: 20px 20px 0px 0px;
+    border-bottom: 2px solid #464646;
+    cursor: pointer;
+}
+
+.ChatGPTResponse__Header p {
+    color: #fff;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.ChatGPTResponse__Footer {
+    border-radius: 20px 20px 0px 0px;
+    background-color: #222;
+    font-family: monospace;
+    text-align: center;
+    font-weight: bold;
+    color:#464646;
+    padding: 10px;
+}
+
+.ChatGPTResponse__Body {
+    height: 295px;
+    background-color: #171717;
+    padding: 10px;
+    color:#fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.ChatGPTResponse__Footer * {
+    margin: 0;
+}
+
+
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

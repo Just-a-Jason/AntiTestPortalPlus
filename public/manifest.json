@@ -1,0 +1,22 @@
+{
+  "name": "Anti Testportal+",
+  "description": "Blurs testportal anti-cheat and give you answers based on OpenAI API.",
+  "version": "1.0.0",
+  "manifest_version": 2,
+  "content_scripts": [
+    {
+      "matches": ["https://*.testportal.pl/*", "https://*.testportal.net/*"],
+      "js": ["index.js"],
+      "all_frames": true
+    }
+  ],
+  "browser_action": {
+    "default_popup": "index.html"
+  },
+  "icons": {
+    "16": "icons/antitestportal16.png",
+    "32": "icons/antitestportal32.png",
+    "48": "icons/antitestportal48.png",
+    "128": "icons/antitestportal128.png"
+  }
+}
