@@ -1,52 +1,55 @@
-#widget-container {
+.SettingsBox {
+  background-color: #fafafa;
+  border:solid 3px #e6e6e6;
+  font-family: monospace;
+  border-radius: 15px;
+  transition: 0.2s;
   position: fixed;
+  cursor: pointer;
+  font-size: 10px;
+  padding: 10px;
+  z-index: 9999;
+  color: #fff;
   bottom: 20px;
   right: 20px;
-  background-color: #fafafa;
-  color: #fff;
-  padding: 10px;
-  cursor: pointer;
-  border-radius: 5px;
-  font-family: monospace;
-  font-size: 10px;
-  border-radius: 15px;
-  border:solid 3px #e6e6e6;
-  z-index: 9999;
-  transition: 0.2s;
+}
+
+.SettingsBox:hover {
+  background-color: #a6a6a6;
+  border: solid 3px #303030;
 }
 
 #widget-text {
   font-weight: bold;
   transition: 0.2s;
   cursor: pointer;
+  display: flex;
+  height: 20px;
+  width: 20px;
 }
 
-#widget-container:hover {
-  background-color: #a6a6a6;
-  border: solid 3px #303030;
 
-}
 
 #widget-menu {
-  display: none;
-  position: absolute;
-  bottom: 100%; /* Updated to bottom */
-  right: 0;
-  background-color: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
-  z-index: 1; /* Add this line to ensure the menu appears on top */
+  background-color: #fff;
   margin-bottom: 20px;
+  border-radius: 5px;
+  position: absolute;
+  display: none;
+  bottom: 100%; 
+  z-index: 1; 
+  right: 0;
 }
 
 .menu-item {
-  color:#000;
-  padding: 10px;
   border-bottom: 1px solid #ccc;
-  cursor: pointer;
+  font-weight: bold;
   min-width:100px;
   font-size: 14px;
-  font-weight: bold;
+  cursor: pointer;
+  padding: 10px;
+  color:#000;
 }
 
 .menu-item:last-child {

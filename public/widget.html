@@ -1,85 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-   #widget-container {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: #171717;
-  color: #fff;
-  padding: 10px;
-  cursor: pointer;
-  border-radius: 5px;
-  font-family: monospace;
-  font-size: 10px;
-  border-radius: 15px;
-  border:solid 3px #555;
-  z-index: 9999;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatGPT Response</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
 
-#widget-text {
-  font-weight: bold;
-}
+        .chat-container {
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
 
-#widget-menu {
-  display: none;
-  position: absolute;
-  bottom: 100%; /* Updated to bottom */
-  right: 0;
-  background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
-  z-index: 1; /* Add this line to ensure the menu appears on top */
-  margin-bottom: 20px;
-}
+        .chat-bubble {
+            padding: 10px;
+            margin: 5px;
+            border-radius: 8px;
+            max-width: 70%;
+        }
 
-.menu-item {
-  color:#000;
-  padding: 10px;
-  border-bottom: 1px solid #ccc;
-  cursor: pointer;
-  min-width:100px;
-  font-size: 14px;
-  font-weight: bold;
-}
+        .user-bubble {
+            background-color: #4CAF50;
+            color: #fff;
+            align-self: flex-end;
+        }
 
-#widget-text img {
-    width: 20px;
-    height: 20px;
-}
-
-.menu-item:last-child {
-  border-bottom: none;
-}
-  </style>
-  <title>ChatGPT Widget</title>
+        .assistant-bubble {
+            background-color: #fff;
+            color: #333;
+            align-self: flex-start;
+        }
+    </style>
 </head>
 <body>
+    <div class="chat-container">
+        <!-- User's message -->
+        <div class="chat-bubble user-bubble">
+            Hello, how can I help you?
+        </div>
 
-  <div id="widget-container">
-      <div id="widget-menu">
-        <!-- Add your menu items here -->
-        <div class="menu-item">Item 1</div>
-        <div class="menu-item">Item 2</div>
-        <!-- Add more items as needed -->
-      </div>
-    <div id="widget-text">
-        <img src="https://github.com/Just-a-Jason/AntiTestPortalPlus/blob/main/public/icons/antitestportal128.png?raw=true" alt="anti-test-plus">
+        <!-- ChatGPT's response -->
+        <div class="chat-bubble assistant-bubble">
+            Welcome! I'm here to assist you.
+        </div>
+
+        <!-- You can add more chat bubbles as needed -->
+
     </div>
-  </div>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      var widgetContainer = document.getElementById('widget-container');
-      var widgetMenu = document.getElementById('widget-menu');
-
-      widgetContainer.addEventListener('click', function () {
-        widgetMenu.style.display = (widgetMenu.style.display === 'none' || widgetMenu.style.display === '') ? 'block' : 'none';
-      });
-    });
-  </script>
 </body>
 </html>

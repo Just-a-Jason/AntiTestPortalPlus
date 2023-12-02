@@ -9,7 +9,7 @@ export default class SettingsBox extends UIComponent {
 
   override _template(): HTMLElement {
       const widgetContainer = document.createElement('div');
-      widgetContainer.id = 'widget-container';
+      widgetContainer.classList.add('SettingsBox');
       document.body.appendChild(widgetContainer);
 
       const widgetMenu = document.createElement('div');

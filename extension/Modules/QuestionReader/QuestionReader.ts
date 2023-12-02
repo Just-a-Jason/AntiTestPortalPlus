@@ -21,14 +21,15 @@ export default abstract class QuestionReader {
 
     static readAnswers(): string  {
         const answers = document.querySelector('.question_answers');
-
         if(!answers) return '';
 
+        let content = '';
+        
         answers.childNodes.forEach(answer => {
             const p = (answer as HTMLElement).querySelector('p');
-            if (p) console.log(p.innerText);
+            if (p) content += p.innerText + '\n';
         });
 
-        return 'some text';
+        return content;
     }
 }

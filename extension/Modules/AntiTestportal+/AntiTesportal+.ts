@@ -16,7 +16,8 @@ export default class AntiTestportalPlus {
    
     constructor() {
         if (this._settingsBox.getSettingsValue('unlimitedTime_Module')) {
-            ScriptBuilder.build("window.startTime = 99999999999;");
+            // clearInterval(2);
+            // ScriptBuilder.build("window.startTime = 99999999999;");
         }
         
         if(this._settingsBox.getSettingsValue('antiBlur_Module')) AntiBlur.turn(true);
