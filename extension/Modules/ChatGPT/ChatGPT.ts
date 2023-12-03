@@ -1,8 +1,5 @@
 import ResponseWindow from "./UI/ResponseWindow/ResponseWindow";
 import QuestionReader from "../QuestionReader/QuestionReader";
-import ChatGPTError from "./UI/ChatGPTError/ChatGPTError";
-import HtmlHelper from "../Helpers/HtmlHelper/HtmlHelper";
-import RetryButton from "./UI/RetryButton/RetryButton";
 import DomInserter from "../DomInserter/DomInserter";
 
 export default abstract class ChatGPT {
@@ -27,15 +24,7 @@ export default abstract class ChatGPT {
                 console.log(questionContent);
     
                 setTimeout(() => {
-                    const body = ChatGPT._window?._getBody()?.querySelector('.ChatGPTResponse__Body');
-                    if(body) {
-                        const error = new ChatGPTError('Something went wrong. Please try again later.');
-                        const button = new RetryButton();
-    
-                        HtmlHelper.removeAllChild(body as HTMLElement);
-                        body.appendChild(error._getBody());
-                        body.appendChild(button._getBody());
-                    }
+                    ChatGPT._window?.displayError('Something went wrong. Please try again later.');
                 }, 3000);
             };
         }

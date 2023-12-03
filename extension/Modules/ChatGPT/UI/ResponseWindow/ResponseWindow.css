@@ -9,9 +9,6 @@
     box-shadow: 2px 2px 15px #000;
 }
 
-.ChatGPTResponse__Body * {
-    margin: 0px;
-}
 
 .ChatGPTResponse__Image {
     height: 20px;

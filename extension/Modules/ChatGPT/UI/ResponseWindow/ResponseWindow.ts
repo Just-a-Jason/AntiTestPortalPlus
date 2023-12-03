@@ -1,16 +1,17 @@
 import HtmlHelper from "../../../Helpers/HtmlHelper/HtmlHelper";
-import QuestionReader from "../../../QuestionReader/QuestionReader";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
-import ResponseArea from "../ResponseArea/ResponseArea";
 import UIComponent from "../../../UI Components/UIComponent"; 
+import ResponseArea from "../ResponseArea/ResponseArea";
+import ChatGPTError from "../ChatGPTError/ChatGPTError";
+import RetryButton from "../RetryButton/RetryButton";
 import './ResponseWindow.css';
 
 export default class ResponseWindow extends UIComponent {
-    private _loadingSpinner: LoadingSpinner | null = null;
     private _responseBody: HTMLElement | null = null;
 
     constructor() {
         super();
+        this._responseBody = this._body.querySelector('.ChatGPTResponse__Body');
     }
     
     override _template(): HTMLElement {
@@ -37,9 +38,7 @@ export default class ResponseWindow extends UIComponent {
         bodySection.className = 'ChatGPTResponse__Body';
         this._responseBody = bodySection;
 
-        this._loadingSpinner = new LoadingSpinner();
-
-        bodySection.appendChild(this._loadingSpinner._getBody());
+        bodySection.appendChild(new LoadingSpinner()._getBody());
 
         const footerSection = document.createElement('footer');
         footerSection.className = 'ChatGPTResponse__Footer';
@@ -66,5 +65,16 @@ export default class ResponseWindow extends UIComponent {
         res.setContent(content);
 
         this._responseBody?.appendChild(res._getBody());
+    }
+
+    displayError(text:string):void {
+        if (this._responseBody) {
+            const error = new ChatGPTError(text);
+            const button = new RetryButton();
+    
+            HtmlHelper.removeAllChild(this._responseBody as HTMLElement);
+            this._responseBody.appendChild(error._getBody());
+            this._responseBody.appendChild(button._getBody());
+        }
     }
 }
