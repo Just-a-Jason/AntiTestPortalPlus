@@ -1,7 +1,11 @@
-import AntiBlur from "../../Blur/AntiBlur";
 import ChatGPT from "../../ChatGPT/ChatGPT";
+import AntiBlur from "../../Blur/AntiBlur";
 import UIComponent from "../UIComponent";
 import './Slider.css';
+import { SettingKey } from "../SettingsBox/SettingKey";
+import { unlink } from "fs";
+import UnlimitedTime from "../../UnlimitedTime/UnlimitedTime";
+import PeterTV from "../../PeterTV/PeterTV";
 
 export default class Slider extends UIComponent {
   private _on:boolean = false;
@@ -17,7 +21,7 @@ export default class Slider extends UIComponent {
     return sliderContainer;
   }
 
-  constructor(private _settingKey:string) {
+  constructor(private _settingKey:SettingKey) {
     super();
 
     if (localStorage.getItem(this._settingKey)) this._on = JSON.parse(localStorage.getItem(this._settingKey)!);
@@ -26,9 +30,16 @@ export default class Slider extends UIComponent {
   }
 
   override _ready(): void {    
-    this._body.addEventListener('click', () => {
+    this._body.addEventListener('click', (e) => {
       this.setState(!this._on);
       this.setSettingState();
+
+      if(this._settingKey == "peterTV_Module") {
+          PeterTV.turn(this._on, {
+            x: e.pageX,
+            y: e.pageY
+          });
+      }
     });
   }
 
@@ -50,6 +61,9 @@ export default class Slider extends UIComponent {
     this.setState(JSON.parse(localStorage.getItem(this._settingKey)!));
     
     switch (this._settingKey) {
+      case 'unlimitedTime_Module':
+        UnlimitedTime.turn(this._on);  
+      break;
       case 'antiBlur_Module':
         AntiBlur.turn(this._on);
       break;

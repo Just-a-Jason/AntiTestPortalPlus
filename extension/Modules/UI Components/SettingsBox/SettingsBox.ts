@@ -1,10 +1,9 @@
+import AssetsLoader from "../../Helpers/AssetsLoader/AssetsLoader";
 import MenuItem from "../MenuItem/MenuItem";
 import UIComponent from "../UIComponent";
+import { SettingKey } from "./SettingKey";
 import Slider from "../Slider/Slider";
 import './SettingsBox.css';
-import AssetsLoader from "../../Helpers/AssetsLoader/AssetsLoader";
-
-type SettingKey = 'antiBlur_Module' | 'chatGPT_Module' | 'imageSearch_Module' | 'unlimitedTime_Module' | 'questionSearch_Module';
 
 export default class SettingsBox extends UIComponent {
 
@@ -39,15 +38,16 @@ export default class SettingsBox extends UIComponent {
   }
 
   private addSliders():void {
-    const menuItems = ['Anti Blur 🫧', 'chatGPT 🤖', 'Image Search 🖼️🔍', 'Unlimited Time ⌛', 'Question Search ❓🔍'];
+    const menuItems = ['Anti Blur 🫧', 'chatGPT 🤖', 'Image Search 🖼️🔍', 'Unlimited Time ⌛', 'Question Search ❓🔍', 'PeterTV 📺'];
     const menu = this._body.querySelector('#widget-menu');
     
-    const _keys = new Map([
+    const _keys:Map<SettingKey, string> = new Map([
       ['antiBlur_Module', 'true'],
       ['chatGPT_Module', 'false'],
       ['imageSearch_Module', 'false'],
       ['unlimitedTime_Module', 'false'],
-      ['questionSearch_Module', 'true']
+      ['questionSearch_Module', 'true'],
+      ['peterTV_Module', 'false']
     ]);
 
     let idx = 0;

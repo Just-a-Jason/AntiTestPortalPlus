@@ -5,15 +5,20 @@ import './VideoWindow.css';
 export default class VideoWindow extends UIComponent {
   private selected:boolean = false;
   
-  private moveWindow(e:MouseEvent) {
+  private moveWindow(x:number, y:number) {
     if  (this.selected) {
-      const x = e.pageX - (this._body.clientWidth/2)+ 'px';
-      const y = e.pageY -(this._body.clientHeight/2) + 'px';
-
-      this._body.style['left'] = x;
-      this._body.style['top'] = y;
+      this.setPosition({x: x, y: y});
     }
   }  
+
+
+  setPosition(position: {x:number, y: number}):void {
+    const x = position.x - (this._body.clientWidth/2)+ 'px';
+    const y = position.y -(this._body.clientHeight/2) + 'px';
+
+    this._body.style['left'] = x;
+    this._body.style['top'] = y;
+  }
 
   override _template():HTMLElement {
     const peterTV = document.createElement('div');
@@ -31,9 +36,14 @@ export default class VideoWindow extends UIComponent {
   
 
   override _ready(): void {
-    document.onmousemove = (e) => {this.moveWindow(e)};
-    this._body.addEventListener('mousedown', () => this.selected = true);
-    this._body.addEventListener('mouseup', () => this.selected = false);
+    ['mousedown', 'touchstart'].forEach(event => this._body.addEventListener(event, () => this.selected = true));
+    
+    ['mouseup', 'touchend'].forEach(event =>  this._body.addEventListener(event, () => this.selected = false));
+   
+    ['mousemove', 'touchmove'].forEach(event => this._body.addEventListener(event, (e) => {
+        if(e instanceof TouchEvent) this.moveWindow(e.touches[0].pageX, e.touches[0].pageY);
+        if (e instanceof MouseEvent) this.moveWindow(e.pageX, e.pageY);
+    }));
   }
 }
 
