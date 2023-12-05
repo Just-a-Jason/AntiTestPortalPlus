@@ -18,5 +18,6 @@
     "32": "icons/antitestportal32.png",
     "48": "icons/antitestportal48.png",
     "128": "icons/antitestportal128.png"
-  }
+  },
+  "web_accessible_resources": [ "Assets/*" ]
 }

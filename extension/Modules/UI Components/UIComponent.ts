@@ -1,4 +1,4 @@
-import IUIElement from "../ChatGPT/Interfaces/IUIElement";
+import IUIElement from "./Interfaces/IUIElement";
 import DomInserter from "../DomInserter/DomInserter";
 
 export default abstract class UIComponent implements IUIElement {
@@ -57,7 +57,5 @@ export default abstract class UIComponent implements IUIElement {
         DomInserter.insert(this._body);
     }
 
-    _template(): HTMLElement {
-        throw new Error('UIComponent.template() shape is not defined!');
-    }
+    protected abstract _template(): HTMLElement;
 }

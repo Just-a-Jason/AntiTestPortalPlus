@@ -1,0 +1,19 @@
+.PeterTV__video {
+    width: 150px;
+    height: 150px;
+    cursor: grab;
+}
+
+.PeterTV {
+    position: absolute;
+    animation: popUp 0.5s ease-in;
+}
+
+@keyframes popUp {
+    from {
+        scale: 0;
+    }
+    to {
+        scale: 1;
+    }
+}

@@ -2,6 +2,7 @@ import MenuItem from "../MenuItem/MenuItem";
 import UIComponent from "../UIComponent";
 import Slider from "../Slider/Slider";
 import './SettingsBox.css';
+import AssetsLoader from "../../Helpers/AssetsLoader/AssetsLoader";
 
 type SettingKey = 'antiBlur_Module' | 'chatGPT_Module' | 'imageSearch_Module' | 'unlimitedTime_Module' | 'questionSearch_Module';
 
@@ -20,7 +21,7 @@ export default class SettingsBox extends UIComponent {
       widgetText.id = 'widget-text';
 
       const image = document.createElement('img');
-      image.src = 'https://github.com/Just-a-Jason/AntiTestPortalPlus/blob/main/public/icons/antitestportal48.png?raw=true';
+      image.src = AssetsLoader.LoadAsset('logo.png');
       image.classList.add('SettingsBox__image');
 
       widgetText.appendChild(image);

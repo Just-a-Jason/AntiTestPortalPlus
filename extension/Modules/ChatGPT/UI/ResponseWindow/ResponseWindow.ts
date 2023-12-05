@@ -5,6 +5,7 @@ import ResponseArea from "../ResponseArea/ResponseArea";
 import ChatGPTError from "../ChatGPTError/ChatGPTError";
 import RetryButton from "../RetryButton/RetryButton";
 import './ResponseWindow.css';
+import AssetsLoader from "../../../Helpers/AssetsLoader/AssetsLoader";
 
 export default class ResponseWindow extends UIComponent {
     private _responseBody: HTMLElement | null = null;
@@ -23,7 +24,7 @@ export default class ResponseWindow extends UIComponent {
 
         const imageElement = document.createElement('img');
         
-        imageElement.src = 'https://github.com/Just-a-Jason/AntiTestPortalPlus/blob/main/public/Assets/chat-logo.png?raw=true';
+        imageElement.src = AssetsLoader.LoadAsset('chat-logo.png');
         
         imageElement.alt = 'chat gpt logo';
         imageElement.className = 'ChatGPTResponse__Image';

@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/chrome": "^0.0.253",
     "@types/node": "^20.8.7",
     "ts-loader": "^9.5.0",
     "tsc-loader": "^1.0.4",

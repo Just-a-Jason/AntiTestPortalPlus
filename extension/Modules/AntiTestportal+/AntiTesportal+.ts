@@ -2,6 +2,8 @@ import SettingsBox from "../UI Components/SettingsBox/SettingsBox";
 import QuestionSearch from "../QuestionSearch/QuestionSearch";
 import ChatGPT from "../ChatGPT/ChatGPT";
 import AntiBlur from "../Blur/AntiBlur";
+import DomInserter from "../DomInserter/DomInserter";
+import VideoWindow from "../PeterTV/UI/VideoWindow";
 
 declare global {
     interface Window {
@@ -13,6 +15,16 @@ export default class AntiTestportalPlus {
     private readonly _settingsBox = new SettingsBox();
    
     constructor() {
+        
+        const button = document.createElement('button');
+        button.innerText = 'new PeaterTV';
+
+        button.onclick = () => {
+            DomInserter.insert(new VideoWindow());
+        }
+        
+        DomInserter.insert(button);
+
         if (this._settingsBox.getSettingsValue('unlimitedTime_Module')) {
         }
         
