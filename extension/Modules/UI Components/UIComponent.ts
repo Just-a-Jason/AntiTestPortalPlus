@@ -1,5 +1,5 @@
-import IUIElement from "./Interfaces/IUIElement";
 import DomInserter from "../DomInserter/DomInserter";
+import IUIElement from "./Interfaces/IUIElement";
 
 export default abstract class UIComponent implements IUIElement {
     protected _body;

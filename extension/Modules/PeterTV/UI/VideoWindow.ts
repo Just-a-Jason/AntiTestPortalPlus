@@ -1,9 +1,11 @@
-import AssetsLoader from "../../Helpers/AssetsLoader/AssetsLoader";
 import UIComponent from "../../UI Components/UIComponent";
+import AssetsLoader from "../../Helpers/AssetsLoader/AssetsLoader";
 import './VideoWindow.css';
 
 export default class VideoWindow extends UIComponent {
   private selected:boolean = false;
+  private currentVideo = 0;
+  private maxVideos = 2;
   
   private moveWindow(x:number, y:number) {
     if  (this.selected) {
@@ -21,19 +23,35 @@ export default class VideoWindow extends UIComponent {
   }
 
   override _template():HTMLElement {
-    const peterTV = document.createElement('div');
-    peterTV.classList.add('PeterTV');
+      const peterTV = document.createElement('div');
+      peterTV.className = 'PeterTV';
 
-    const video = document.createElement('video');
-    video.src = AssetsLoader.LoadAsset('PeterTV/vid_1.mp4');
-    video.classList.add('PeterTV__video');
-    video.autoplay = true;
-    video.loop = true;
+      const image = document.createElement('img');
+      image.src = AssetsLoader.LoadAsset('PeterTV/peterTv.png');
+      image.alt = 'peterTV';
+      image.className = 'PeterTV__TVImage';
 
-    peterTV.appendChild(video);
-    return peterTV;
+      const video = document.createElement('video');
+      video.src = AssetsLoader.LoadAsset(`PeterTV/vid_${this.currentVideo || 0}.mp4`);
+
+      video.addEventListener('ended' , () => this.nextVideo(video));
+
+      video.addEventListener('dblclick', () => this.nextVideo(video));
+
+      video.className = 'PeterTV__video';
+      video.autoplay = true;
+
+      peterTV.appendChild(image);
+      peterTV.appendChild(video);
+
+      return peterTV;
   }
-  
+
+  private nextVideo(video:HTMLVideoElement):void {
+    this.currentVideo++;
+    this.currentVideo %= this.maxVideos;
+    video.src = AssetsLoader.LoadAsset(`PeterTV/vid_${this.currentVideo}.mp4`);
+  }
 
   override _ready(): void {
     ['mousedown', 'touchstart'].forEach(event => this._body.addEventListener(event, () => this.selected = true));
@@ -45,5 +63,8 @@ export default class VideoWindow extends UIComponent {
         if (e instanceof MouseEvent) this.moveWindow(e.pageX, e.pageY);
     }));
   }
+
+
+
 }
 

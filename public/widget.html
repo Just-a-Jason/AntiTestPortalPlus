@@ -3,16 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ChatGPT Response</title>
+    <title>Widget</title>
     <style>
-     
+        body {
+            background: #222;
+        }
 
+        .UIButton {
+            width: 125px;
+            background: #555;
+            padding: 2px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 1px 1px 20px #000;
+            cursor: pointer;
+            border: solid 2px #888;
+            transition: 0.2s;
+        }
+
+        .UIButton:hover {
+            width: 125px;
+            background: #373434;
+            padding: 2px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 1px 1px 20px #000;
+            cursor: pointer;
+            border: solid 2px #555;
+        }
+        
+        .UIButton-text {
+            font-family: monospace;
+            font-weight: bold;
+            font-size: 10px;
+            color: #fff;
+        }
     </style>
 </head>
 <body>
-    <div class="PeterTV">
-        <video src="../public/Assets/PeterTV/vid_1.mp4" class="PeterTV__video" autoplay loop></video>
+    <div class="UIButton">
+        <p class="UIButton-text">peterTV</p>
     </div>
-    
 </body>
 </html>
