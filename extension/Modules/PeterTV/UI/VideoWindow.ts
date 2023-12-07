@@ -9,6 +9,7 @@ export default class VideoWindow extends UIComponent {
   
   private moveWindow(x:number, y:number) {
     if  (this.selected) {
+      this._body.style['position'] = 'absolute';
       this.setPosition({x: x, y: y});
     }
   }  

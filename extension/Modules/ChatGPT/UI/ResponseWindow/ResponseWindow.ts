@@ -1,21 +1,21 @@
 import HtmlHelper from "../../../Helpers/HtmlHelper/HtmlHelper";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
-import UIComponent from "../../../UI Components/UIComponent"; 
 import ResponseArea from "../ResponseArea/ResponseArea";
 import ChatGPTError from "../ChatGPTError/ChatGPTError";
 import RetryButton from "../RetryButton/RetryButton";
 import './ResponseWindow.css';
 import AssetsLoader from "../../../Helpers/AssetsLoader/AssetsLoader";
+import { UIComponentProps } from "../../../UI Components/Interfaces/UIComponentProps";
+import { UIComponentNew } from "../../../UI Components/UIComponentNew";
 
-export default class ResponseWindow extends UIComponent {
-    private _responseBody: HTMLElement | null = null;
 
-    constructor() {
-        super();
-        this._responseBody = this._body.querySelector('.ChatGPTResponse__Body');
-    }
-    
-    override _template(): HTMLElement {
+interface IResponseWindowProps extends UIComponentProps {
+    responseBody:HTMLElement;
+}
+
+export default class ResponseWindow extends UIComponentNew<IResponseWindowProps> {
+
+    override _template(): UITemplate<IResponseWindowProps> {
         const chatGPTResponse = document.createElement('div');
         chatGPTResponse.className = 'ChatGPTResponse';
 
@@ -37,7 +37,6 @@ export default class ResponseWindow extends UIComponent {
 
         const bodySection = document.createElement('section');
         bodySection.className = 'ChatGPTResponse__Body';
-        this._responseBody = bodySection;
 
         bodySection.appendChild(new LoadingSpinner()._getBody());
 
@@ -53,7 +52,12 @@ export default class ResponseWindow extends UIComponent {
         chatGPTResponse.appendChild(bodySection);
         chatGPTResponse.appendChild(footerSection);
         
-        return chatGPTResponse;
+        return {
+            element: chatGPTResponse,
+            structure: {
+                responseBody: bodySection
+            }
+        };
     }
 
     override _ready(): void {
@@ -61,21 +65,21 @@ export default class ResponseWindow extends UIComponent {
     }
 
     setResponse(content:string):void {
-        HtmlHelper.removeAllChild(this._responseBody as HTMLElement);
+        HtmlHelper.removeAllChild(this._body.structure?.responseBody!);
         const res = new ResponseArea();
         res.setContent(content);
 
-        this._responseBody?.appendChild(res._getBody());
+        this._body.structure?.responseBody.appendChild(res._getBody());
     }
 
     displayError(text:string):void {
-        if (this._responseBody) {
+        if (this._body.structure?.responseBody) {
             const error = new ChatGPTError(text);
             const button = new RetryButton();
     
-            HtmlHelper.removeAllChild(this._responseBody as HTMLElement);
-            this._responseBody.appendChild(error._getBody());
-            this._responseBody.appendChild(button._getBody());
+            HtmlHelper.removeAllChild(this._body.structure.responseBody!);
+            this._body.structure?.responseBody.appendChild(error._getBody());
+            this._body.structure?.responseBody.appendChild(button._getBody());
         }
     }
 }

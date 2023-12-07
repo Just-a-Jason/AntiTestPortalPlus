@@ -1,39 +1,20 @@
-/* .PeterTV__video {
-    width: 150px;
-    height: 150px;
-    cursor: grab;
-}
-
 .PeterTV {
-    position: absolute;
-    animation: popUp 0.5s ease-in;
+    justify-content: center;
+    background-color:#000;
+    align-items: center;
+    overflow: hidden;
+    height: 125px;
+    display: flex;
+    width: 190px;
+    cursor: grab;
+    margin-top: 50px;
 }
-
-@keyframes popUp {
-    from {
-        scale: 0;
-    }
-    to {
-        scale: 1;
-    }
-} */
 
 .PeterTV__TVImage {
     position: absolute;
     width: 200px;
- }
+}
 
- .PeterTV {
-    overflow: hidden;
-    width: 190px;
-    background-color:#000;
-    height: 125px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: grab;
-    position: absolute;
- }
- .PeterTV__video {
+.PeterTV__video {
     width: 150px;   
- }
+}

@@ -6,12 +6,13 @@ export default abstract class PeterTV {
 
     static turn(state:boolean, position:null | {x:number, y:number} = null):void {
         if (state) {
-            const window = new VideoWindow();
-
-            if(position) window.setPosition(position);
-            
-            this._peterTVWindow = window;
-            DomInserter.insert(window);
+            if(document.URL.includes('/exam/DoTestQuestion.html') || document.URL.includes('/exam/DoStartTest.html') || document.URL.includes('/exam/LoadQuestion.html')) {
+                const parent = document.querySelector('.question-area') as HTMLElement;
+                const window = new VideoWindow();
+                    
+                this._peterTVWindow = window;
+                DomInserter.insert(window, parent);
+            }
         }
         else this._peterTVWindow?._remove();
     }
