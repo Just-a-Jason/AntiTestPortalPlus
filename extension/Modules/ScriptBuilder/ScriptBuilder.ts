@@ -7,7 +7,6 @@ export default abstract class ScriptBuilder {
 
         if (typeof(content) === 'string') script.textContent = content;
         else script.textContent = content.toString();
-        console.log('script injected.');
         DomInserter.insert(script);
         return script;
     }

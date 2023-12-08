@@ -1,14 +1,20 @@
+import UIComponentProps from "../Interfaces/UIComponentProps";
+import UnlimitedTime from "../../UnlimitedTime/UnlimitedTime";
 import ChatGPT from "../../ChatGPT/ChatGPT";
+import PeterTV from "../../PeterTV/PeterTV";
 import AntiBlur from "../../Blur/AntiBlur";
 import UIComponent from "../UIComponent";
-import UnlimitedTime from "../../UnlimitedTime/UnlimitedTime";
-import PeterTV from "../../PeterTV/PeterTV";
+import UIComponentNew from "../UIComponentNew";
 import './Slider.css';
 
-export default class Slider extends UIComponent {
+interface ISliderProps extends UIComponentProps {
+    sliderState:HTMLElement;
+}
+
+export default class Slider extends UIComponentNew<ISliderProps> {
   private _on:boolean = false;
 
-  override _template(): HTMLElement {
+  override _template(): UITemplate<ISliderProps> {
     const sliderContainer = document.createElement('div');
     sliderContainer.className = 'slider';
     document.body.appendChild(sliderContainer);
@@ -16,7 +22,12 @@ export default class Slider extends UIComponent {
     const sliderSet = document.createElement('div');
     sliderSet.className = 'slider__set';
     sliderContainer.appendChild(sliderSet);
-    return sliderContainer;
+    return {
+      element:sliderContainer, 
+      structure: {
+        sliderState:sliderSet
+      }
+    };
   }
 
   constructor(private _settingKey:SettingKey) {
@@ -25,10 +36,8 @@ export default class Slider extends UIComponent {
     if (localStorage.getItem(this._settingKey)) this._on = JSON.parse(localStorage.getItem(this._settingKey)!);
     
     this.setState(this._on);
-  }
-
-  override _ready(): void {    
-    this._body.addEventListener('click', (e) => {
+    
+    this._body.element.addEventListener('click', (e) => {
       this.setState(!this._on);
       this.setSettingState();
 
@@ -44,12 +53,10 @@ export default class Slider extends UIComponent {
   private setState(_state:boolean):void {
     let state = (_state) ?  120 : 0;
     
-    if(_state) this._body.classList.add('on');
-    else this._body.classList.remove('on');
-    
-    const sliderState = this._body.querySelector('.slider__set');
-    
-    if(sliderState) (sliderState as HTMLElement).style['transform'] = `translateX(${state}%)`;
+    if(_state) this._body.element.classList.add('on');
+    else this._body.element.classList.remove('on');
+        
+    this._body.structure!.sliderState.style['transform'] = `translateX(${state}%)`;
     this._on = _state;
   }
 

@@ -1,7 +1,6 @@
 import AssetsLoader from "../../Helpers/AssetsLoader/AssetsLoader";
 import MenuItem from "../MenuItem/MenuItem";
 import UIComponent from "../UIComponent";
-import { SettingKey } from "./SettingKey";
 import Slider from "../Slider/Slider";
 import './SettingsBox.css';
 
@@ -57,7 +56,7 @@ export default class SettingsBox extends UIComponent {
 
       const menuItem = new MenuItem(menuItems[idx++]);
       const slider = new Slider(key);
-      menuItem.appendChild(slider);
+      menuItem.appendChild(slider._getBody().element);
 
       menu?.appendChild(menuItem._getBody());
     }
