@@ -1,6 +1,6 @@
-import { UIComponentProps } from "./Interfaces/UIComponentProps";
+import UIComponentProps from "./Interfaces/UIComponentProps";
 
-export abstract class UIComponentNew<Props extends UIComponentProps = UIComponentProps> {
+export default abstract class UIComponentNew<Props extends UIComponentProps = UIComponentProps> {
     protected _body: UITemplate<Props>;
 
     constructor() {
@@ -29,14 +29,4 @@ export abstract class UIComponentNew<Props extends UIComponentProps = UIComponen
 
     protected abstract _template(): UITemplate<Props>;
     protected _ready(): void {console.log(`${this.constructor.name} is ready!`)};
-}
-
-
-export class MyButton extends UIComponentNew {
-    private content:string = 'hi';
-    
-    protected _template(): UITemplate<UIComponentProps> {
-        return {element: document.createElement('div')};
-    }
-
 }

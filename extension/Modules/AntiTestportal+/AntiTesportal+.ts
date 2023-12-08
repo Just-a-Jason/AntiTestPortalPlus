@@ -3,13 +3,7 @@ import QuestionSearch from "../QuestionSearch/QuestionSearch";
 import UnlimitedTime from "../UnlimitedTime/UnlimitedTime";
 import ChatGPT from "../ChatGPT/ChatGPT";
 import AntiBlur from "../Blur/AntiBlur";
-import { MyButton } from "../UI Components/UIComponentNew";
 
-declare global {
-    interface Window {
-        startTime: number;
-    }
-}
 
 export default class AntiTestportalPlus {
     private readonly _settingsBox = new SettingsBox();
@@ -22,6 +16,5 @@ export default class AntiTestportalPlus {
 
         console.clear();
         console.log('%cAntiTestportal+\nby: @Jason.json','color: #ff0; font-size: 20px;');
-        new MyButton();
     }
 }

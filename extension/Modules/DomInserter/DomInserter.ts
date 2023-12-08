@@ -1,4 +1,4 @@
-import { UIComponentNew } from "../UI Components/UIComponentNew";
+import UIComponentNew from "../UI Components/UIComponentNew";
 import UIComponent from "../UI Components/UIComponent";
 
 export default abstract class DomInserter {

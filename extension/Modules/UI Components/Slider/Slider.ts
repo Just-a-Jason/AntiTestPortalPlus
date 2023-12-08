@@ -1,11 +1,9 @@
 import ChatGPT from "../../ChatGPT/ChatGPT";
 import AntiBlur from "../../Blur/AntiBlur";
 import UIComponent from "../UIComponent";
-import './Slider.css';
-import { SettingKey } from "../SettingsBox/SettingKey";
-import { unlink } from "fs";
 import UnlimitedTime from "../../UnlimitedTime/UnlimitedTime";
 import PeterTV from "../../PeterTV/PeterTV";
+import './Slider.css';
 
 export default class Slider extends UIComponent {
   private _on:boolean = false;

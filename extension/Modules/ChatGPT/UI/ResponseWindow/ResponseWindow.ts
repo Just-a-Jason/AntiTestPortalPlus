@@ -1,21 +1,21 @@
+import UIComponentProps from "../../../UI Components/Interfaces/UIComponentProps";
+import UIComponentNew from "../../../UI Components/UIComponentNew";
+import AssetsLoader from "../../../Helpers/AssetsLoader/AssetsLoader";
 import HtmlHelper from "../../../Helpers/HtmlHelper/HtmlHelper";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 import ResponseArea from "../ResponseArea/ResponseArea";
 import ChatGPTError from "../ChatGPTError/ChatGPTError";
 import RetryButton from "../RetryButton/RetryButton";
 import './ResponseWindow.css';
-import AssetsLoader from "../../../Helpers/AssetsLoader/AssetsLoader";
-import { UIComponentProps } from "../../../UI Components/Interfaces/UIComponentProps";
-import { UIComponentNew } from "../../../UI Components/UIComponentNew";
-
 
 interface IResponseWindowProps extends UIComponentProps {
     responseBody:HTMLElement;
+    spinner?: LoadingSpinner;
 }
 
 export default class ResponseWindow extends UIComponentNew<IResponseWindowProps> {
 
-    override _template(): UITemplate<IResponseWindowProps> {
+    protected override _template(): UITemplate<IResponseWindowProps> {
         const chatGPTResponse = document.createElement('div');
         chatGPTResponse.className = 'ChatGPTResponse';
 
@@ -38,7 +38,8 @@ export default class ResponseWindow extends UIComponentNew<IResponseWindowProps>
         const bodySection = document.createElement('section');
         bodySection.className = 'ChatGPTResponse__Body';
 
-        bodySection.appendChild(new LoadingSpinner()._getBody());
+        const spinner = new LoadingSpinner();
+        bodySection.appendChild(spinner._getBody());
 
         const footerSection = document.createElement('footer');
         footerSection.className = 'ChatGPTResponse__Footer';
@@ -55,7 +56,8 @@ export default class ResponseWindow extends UIComponentNew<IResponseWindowProps>
         return {
             element: chatGPTResponse,
             structure: {
-                responseBody: bodySection
+                responseBody: bodySection,
+                spinner: spinner
             }
         };
     }

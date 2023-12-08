@@ -1,3 +1,3 @@
-export interface UIComponentProps {
-    [key: string]: HTMLElement;
+export default interface UIComponentProps {
+    [key: string]: HTMLElement | object | undefined | null;
 }
