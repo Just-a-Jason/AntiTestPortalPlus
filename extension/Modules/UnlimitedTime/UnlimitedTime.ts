@@ -5,11 +5,7 @@ export default abstract class UnlimitedTime {
     static turn(state:boolean):void {
         
         if(state) {
-            Object.defineProperty(window, 'startingRemainingTimeInM', {
-                writable: false,
-                value: 99999,
-                configurable: false
-            });
+            ScriptBuilder.build("const startingRemainingTimeInMs = 'unlimitedTime'", true);
             
             UnlimitedTime.onLoadScript = ScriptBuilder.build('onLoad = () => {}');
             for (let i = 0; i < 1000; i++) {

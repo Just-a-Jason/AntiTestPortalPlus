@@ -1,10 +1,9 @@
 import UIComponentProps from "../Interfaces/UIComponentProps";
 import UnlimitedTime from "../../UnlimitedTime/UnlimitedTime";
+import UIComponentNew from "../UIComponentNew";
 import ChatGPT from "../../ChatGPT/ChatGPT";
 import PeterTV from "../../PeterTV/PeterTV";
 import AntiBlur from "../../Blur/AntiBlur";
-import UIComponent from "../UIComponent";
-import UIComponentNew from "../UIComponentNew";
 import './Slider.css';
 
 interface ISliderProps extends UIComponentProps {

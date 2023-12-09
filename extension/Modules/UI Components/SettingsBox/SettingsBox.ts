@@ -1,12 +1,18 @@
 import AssetsLoader from "../../Helpers/AssetsLoader/AssetsLoader";
+import UIComponentProps from "../Interfaces/UIComponentProps";
+import UIComponentNew from "../UIComponentNew";
 import MenuItem from "../MenuItem/MenuItem";
-import UIComponent from "../UIComponent";
 import Slider from "../Slider/Slider";
 import './SettingsBox.css';
 
-export default class SettingsBox extends UIComponent {
 
-  override _template(): HTMLElement {
+interface SliderProps extends UIComponentProps {
+  menu:HTMLElement
+}
+
+export default class SettingsBox extends UIComponentNew<SliderProps> {
+
+  protected override _template(): UITemplate<SliderProps> {
       const widgetContainer = document.createElement('div');
       widgetContainer.classList.add('SettingsBox');
       document.body.appendChild(widgetContainer);
@@ -29,16 +35,22 @@ export default class SettingsBox extends UIComponent {
         widgetMenu.classList.toggle('menuVisible');
       });
       
-      return widgetContainer;
+      return {
+        element: widgetContainer, 
+        structure: {
+          menu: widgetMenu
+        }
+      };
   }
 
-  override _ready(): void {
+  constructor() {
+    super();
     this.addSliders();
   }
 
   private addSliders():void {
     const menuItems = ['Anti Blur 🫧', 'chatGPT 🤖', 'Image Search 🖼️🔍', 'Unlimited Time ⌛', 'Question Search ❓🔍', 'PeterTV 📺'];
-    const menu = this._body.querySelector('#widget-menu');
+    const menu = this._body.structure?.menu;
     
     const _keys:Map<SettingKey, string> = new Map([
       ['antiBlur_Module', 'true'],
@@ -58,7 +70,7 @@ export default class SettingsBox extends UIComponent {
       const slider = new Slider(key);
       menuItem.appendChild(slider._getBody().element);
 
-      menu?.appendChild(menuItem._getBody());
+      menu?.appendChild(menuItem._getBody().element);
     }
   }
 
