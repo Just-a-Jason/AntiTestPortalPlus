@@ -3,19 +3,18 @@ import UIComponentNew from "../../../UI Components/UIComponentNew";
 import AssetsLoader from "../../../Helpers/AssetsLoader/AssetsLoader";
 import HtmlHelper from "../../../Helpers/HtmlHelper/HtmlHelper";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
-import ResponseArea from "../ResponseArea/ResponseArea";
 import ChatGPTError from "../ChatGPTError/ChatGPTError";
 import RetryButton from "../RetryButton/RetryButton";
 import './ResponseWindow.css';
 
-interface IResponseWindowProps extends UIComponentProps {
+interface ResponseWindowProps extends UIComponentProps {
     responseBody:HTMLElement;
     spinner?: LoadingSpinner;
 }
 
-export default class ResponseWindow extends UIComponentNew<IResponseWindowProps> {
+export default class ResponseWindow extends UIComponentNew<ResponseWindowProps> {
 
-    protected override _template(): UITemplate<IResponseWindowProps> {
+    protected override _template(): UITemplate<ResponseWindowProps> {
         const chatGPTResponse = document.createElement('div');
         chatGPTResponse.className = 'ChatGPTResponse';
 
@@ -39,7 +38,7 @@ export default class ResponseWindow extends UIComponentNew<IResponseWindowProps>
         bodySection.className = 'ChatGPTResponse__Body';
 
         const spinner = new LoadingSpinner();
-        bodySection.appendChild(spinner._getBody());
+        bodySection.appendChild(spinner._getBody().element);
 
         const footerSection = document.createElement('footer');
         footerSection.className = 'ChatGPTResponse__Footer';
@@ -66,21 +65,13 @@ export default class ResponseWindow extends UIComponentNew<IResponseWindowProps>
         console.log('ResponseBox is ready!');
     }
 
-    setResponse(content:string):void {
-        HtmlHelper.removeAllChild(this._body.structure?.responseBody!);
-        const res = new ResponseArea();
-        res.setContent(content);
-
-        this._body.structure?.responseBody.appendChild(res._getBody());
-    }
-
     displayError(text:string):void {
         if (this._body.structure?.responseBody) {
             const error = new ChatGPTError(text);
             const button = new RetryButton();
     
             HtmlHelper.removeAllChild(this._body.structure.responseBody!);
-            this._body.structure?.responseBody.appendChild(error._getBody());
+            this._body.structure?.responseBody.appendChild(error._getBody().element);
             this._body.structure?.responseBody.appendChild(button._getBody());
         }
     }

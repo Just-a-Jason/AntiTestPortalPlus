@@ -1,8 +1,9 @@
-import UIComponent from "../../../UI Components/UIComponent";
+import UIComponentProps from "../../../UI Components/Interfaces/UIComponentProps";
+import UIComponentNew from "../../../UI Components/UIComponentNew";
 import './LoadingSpinner.css';
 
-export default class Spinner extends UIComponent {
-    override _template(): HTMLElement {
+export default class Spinner extends UIComponentNew {
+    override _template(): UITemplate<UIComponentProps> {
        const loadingSpinner = document.createElement('div');
        loadingSpinner.className = 'loadingSpinner';
 
@@ -11,6 +12,6 @@ export default class Spinner extends UIComponent {
            dot.className = 'dot';
            loadingSpinner.appendChild(dot);
        }
-       return loadingSpinner;
+       return {element: loadingSpinner};
     }
 }

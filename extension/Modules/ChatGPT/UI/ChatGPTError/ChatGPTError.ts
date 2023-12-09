@@ -1,15 +1,16 @@
-import UIComponent from "../../../UI Components/UIComponent";
+import UIComponentProps from "../../../UI Components/Interfaces/UIComponentProps";
+import UIComponentNew from "../../../UI Components/UIComponentNew";
 import './ChatGPTError.css';
 
-export default class ChatGPTError extends UIComponent {
-    override _template(): HTMLElement {
+export default class ChatGPTError extends UIComponentNew {
+    protected override _template(): UITemplate<UIComponentProps> {
         const p = document.createElement('p');
         p.classList.add('ChatGPTResponse-ErrorPopUP');        
-        return p;
+        return {element: p};
     }
 
     constructor(private readonly errorText:string) {
         super();
-        this._body.innerText = this.errorText;
+        this._body.element.innerText = this.errorText;
     }
 }
