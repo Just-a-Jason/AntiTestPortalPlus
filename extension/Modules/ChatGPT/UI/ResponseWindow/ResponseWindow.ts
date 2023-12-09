@@ -72,7 +72,7 @@ export default class ResponseWindow extends UIComponentNew<ResponseWindowProps> 
     
             HtmlHelper.removeAllChild(this._body.structure.responseBody!);
             this._body.structure?.responseBody.appendChild(error._getBody().element);
-            this._body.structure?.responseBody.appendChild(button._getBody());
+            this._body.structure?.responseBody.appendChild(button._getBody().element);
         }
     }
 }
