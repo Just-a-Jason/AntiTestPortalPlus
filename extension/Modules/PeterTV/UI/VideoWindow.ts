@@ -1,29 +1,26 @@
-import UIComponent from "../../UI Components/UIComponent";
+import UIComponentProps from "../../UI Components/Interfaces/UIComponentProps";
 import AssetsLoader from "../../Helpers/AssetsLoader/AssetsLoader";
+import UIComponentNew from "../../UI Components/UIComponentNew";
 import './VideoWindow.css';
 
-export default class VideoWindow extends UIComponent {
+interface VideoWindowProps extends UIComponentProps {
+  video:HTMLVideoElement;
+}
+
+export default class VideoWindow extends UIComponentNew<VideoWindowProps> {
   private selected:boolean = false;
   private currentVideo = 0;
   private maxVideos = 2;
   
-  private moveWindow(x:number, y:number) {
-    if  (this.selected) {
-      this._body.style['position'] = 'absolute';
-      this.setPosition({x: x, y: y});
-    }
-  }  
-
-
   setPosition(position: {x:number, y: number}):void {
-    const x = position.x - (this._body.clientWidth/2)+ 'px';
-    const y = position.y -(this._body.clientHeight/2) + 'px';
+    const x = position.x - (this._body.element.clientWidth/2)+ 'px';
+    const y = position.y -(this._body.element.clientHeight/2) + 'px';
 
-    this._body.style['left'] = x;
-    this._body.style['top'] = y;
+    this._body.element.style['left'] = x;
+    this._body.element.style['top'] = y;
   }
 
-  override _template():HTMLElement {
+  override _template() : UITemplate<VideoWindowProps>{
       const peterTV = document.createElement('div');
       peterTV.className = 'PeterTV';
 
@@ -35,9 +32,9 @@ export default class VideoWindow extends UIComponent {
       const video = document.createElement('video');
       video.src = AssetsLoader.LoadAsset(`PeterTV/vid_${this.currentVideo || 0}.mp4`);
 
-      video.addEventListener('ended' , () => this.nextVideo(video));
+      video.addEventListener('ended' , () => this.nextVideo());
 
-      video.addEventListener('dblclick', () => this.nextVideo(video));
+      video.addEventListener('dblclick', () => this.nextVideo());
 
       video.className = 'PeterTV__video';
       video.autoplay = true;
@@ -45,27 +42,17 @@ export default class VideoWindow extends UIComponent {
       peterTV.appendChild(image);
       peterTV.appendChild(video);
 
-      return peterTV;
+      return {element:peterTV, 
+        structure: {
+          video: video
+        }
+      };
   }
 
-  private nextVideo(video:HTMLVideoElement):void {
+  private nextVideo():void {
     this.currentVideo++;
     this.currentVideo %= this.maxVideos;
-    video.src = AssetsLoader.LoadAsset(`PeterTV/vid_${this.currentVideo}.mp4`);
+    this._body.structure!.video.src = AssetsLoader.LoadAsset(`PeterTV/vid_${this.currentVideo}.mp4`);
   }
-
-  override _ready(): void {
-    ['mousedown', 'touchstart'].forEach(event => this._body.addEventListener(event, () => this.selected = true));
-    
-    ['mouseup', 'touchend'].forEach(event =>  this._body.addEventListener(event, () => this.selected = false));
-   
-    ['mousemove', 'touchmove'].forEach(event => this._body.addEventListener(event, (e) => {
-        if(e instanceof TouchEvent) this.moveWindow(e.touches[0].pageX, e.touches[0].pageY);
-        if (e instanceof MouseEvent) this.moveWindow(e.pageX, e.pageY);
-    }));
-  }
-
-
-
 }
 
