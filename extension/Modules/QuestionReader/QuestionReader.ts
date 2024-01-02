@@ -1,4 +1,7 @@
+import { QuestionType } from "./QuestionType";
+
 export default abstract class QuestionReader {
+     
     static readQuestionText():string  {
         const q = document.querySelector('.question_essence');
         return q ? q.textContent! : '';
@@ -31,5 +34,9 @@ export default abstract class QuestionReader {
         });
 
         return content;
+    }
+
+    private static getQuestionType():QuestionType {
+        return QuestionType.SingleAnswer;
     }
 }
