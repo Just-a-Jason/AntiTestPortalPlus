@@ -1,5 +1,4 @@
 import UIComponentProps from "../Interfaces/UIComponentProps";
-import UnlimitedTime from "../../UnlimitedTime/UnlimitedTime";
 import UIComponentNew from "../UIComponentNew";
 import ChatGPT from "../../ChatGPT/ChatGPT";
 import PeterTV from "../../PeterTV/PeterTV";
@@ -65,9 +64,6 @@ export default class Slider extends UIComponentNew<ISliderProps> {
     this.setState(JSON.parse(localStorage.getItem(this._settingKey)!));
     
     switch (this._settingKey) {
-      case 'unlimitedTime_Module':
-        UnlimitedTime.turn(this._on);  
-      break;
       case 'antiBlur_Module':
         AntiBlur.turn(this._on);
       break;
