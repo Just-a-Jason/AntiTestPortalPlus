@@ -67,6 +67,7 @@ export default class ResponseWindow extends UIComponentNew<ResponseWindowProps> 
 
     displayError(text:string):void {
         if (this._body.structure?.responseBody) {
+            this._body.structure.spinner = undefined;
             const error = new ChatGPTError(text);
             const button = new RetryButton();
     
