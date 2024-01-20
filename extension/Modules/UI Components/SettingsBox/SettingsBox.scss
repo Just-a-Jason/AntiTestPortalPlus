@@ -1,0 +1,53 @@
+.SettingsBox {
+  box-shadow: 4px 4px 5px #888;
+  background-color: #fafafa;
+  border:solid 3px #e6e6e6;
+  font-family: monospace;
+  border-radius: 15px;
+  transition: 0.2s;
+  position: fixed;
+  cursor: pointer;
+  font-size: 10px;
+  padding: 10px;
+  z-index: 9999;
+  color: #fff;
+  bottom: 20px;
+  right: 20px;
+
+  &:hover {
+    background-color: #a6a6a6;
+    border: solid 3px #303030;
+  }
+
+  &__image {
+    width: 25px;
+  }
+}
+
+#widget {
+  &-text {
+    font-weight: bold;
+    transition: 0.2s;
+    cursor: pointer;
+    display: flex;
+    height: 20px;
+    width: 20px;
+  }
+
+  &-menu {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    transform: scale(0);
+    position: absolute;
+    transition: 0.2s;
+    bottom: 100%; 
+    z-index: 1; 
+    right: 0;
+
+    &.menuVisible {
+      transform: scale(1);
+    }
+  }
+}

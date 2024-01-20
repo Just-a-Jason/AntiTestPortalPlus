@@ -1,11 +1,11 @@
 import UIComponentProps from "../../../UI Components/Interfaces/UIComponentProps";
-import UIComponentNew from "../../../UI Components/UIComponentNew";
+import UIComponentNew from "../../../UI Components/UIComponent";
 import AssetsLoader from "../../../Helpers/AssetsLoader/AssetsLoader";
 import HtmlHelper from "../../../Helpers/HtmlHelper/HtmlHelper";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 import ChatGPTError from "../ChatGPTError/ChatGPTError";
 import RetryButton from "../RetryButton/RetryButton";
-import './ResponseWindow.css';
+import './ResponseWindow.scss';
 
 interface ResponseWindowProps extends UIComponentProps {
     responseBody:HTMLElement;
@@ -61,9 +61,6 @@ export default class ResponseWindow extends UIComponentNew<ResponseWindowProps> 
         };
     }
 
-    override _ready(): void {
-        console.log('ResponseBox is ready!');
-    }
 
     displayError(text:string):void {
         if (this._body.structure?.responseBody) {

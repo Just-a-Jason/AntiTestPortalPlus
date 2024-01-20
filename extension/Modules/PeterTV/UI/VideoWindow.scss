@@ -3,18 +3,18 @@
     background-color:#000;
     align-items: center;
     overflow: hidden;
+    margin-top: 50px;
     height: 125px;
     display: flex;
     width: 190px;
     cursor: grab;
-    margin-top: 50px;
-}
 
-.PeterTV__TVImage {
-    position: absolute;
-    width: 200px;
-}
+    &__TVImage {
+        position: absolute;
+        width: 200px;
+    }
 
-.PeterTV__video {
-    width: 150px;   
+    &__video {
+        width: 150px;   
+    }
 }

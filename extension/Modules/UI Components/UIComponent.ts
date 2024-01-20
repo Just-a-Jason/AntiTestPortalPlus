@@ -1,61 +1,31 @@
-import DomInserter from "../DomInserter/DomInserter";
-import IUIElement from "./Interfaces/IUIElement";
+import UIComponentProps from "./Interfaces/UIComponentProps";
 
-export default abstract class UIComponent implements IUIElement {
-    protected _body;
+export default abstract class UIComponentNew<Props extends UIComponentProps = UIComponentProps> {
+    protected _body: UITemplate<Props>;
 
     constructor() {
-        this._body = this._template();
-        this._ready();
+       this._body = this.initTemplate();
     }
 
-    appendChild(child: UIComponent | HTMLElement | IUIElement): void {
-        if(child instanceof UIComponent) this._body.appendChild(child._getBody());
-        else if(child instanceof HTMLElement) this._body.appendChild(child);
+    appendChild(child: HTMLElement): void {
+        this._body.element.appendChild(child);
     }
 
-
-    /**
-     * @description It's called once, when visal content of the component is destroyed.
-     * @example 
-     * class MyButton extends UIComponent {
-     *  override _template():HTMLElement {
-     *      const button = doceument.createElement('button');
-     *      button.value = 'MyButton';
-     *      return button;
-     *  }
-     * 
-     *  override _ready():void {
-     *      this._remove();
-     *  }
-     * 
-     *  override _done():void {
-     *      // Instructions...
-     *      cosnole.log('MyButton has been destroyed.');
-     *  }
-     * }
-     * 
-     */
-    _done(): void {
-        console.log(`${this.constructor.name} has been destroyed.`)
-    }
-
-    _getBody(): HTMLElement {
+    _getBody(): UITemplate<Props> {
         return this._body;
     }
 
-    /**
-     * @description Removes html-template visal from DOM.
-     * @example _template():HTMLElement;
-     */
-    _remove():void {
-        this._body.remove();
+    _remove(): void {
+        this._body.element.remove();
         this._done();
     }
-    
-    _ready(): void {
-        DomInserter.insert(this._body);
+
+    private initTemplate():UITemplate<Props> {
+        return this._template();
     }
 
-    protected abstract _template(): HTMLElement;
+    protected _done():void {}
+
+    protected abstract _template(): UITemplate<Props>;
+    protected _ready():void {};
 }

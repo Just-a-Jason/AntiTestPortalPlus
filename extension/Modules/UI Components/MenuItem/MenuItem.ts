@@ -1,6 +1,6 @@
 import UIComponentProps from '../Interfaces/UIComponentProps';
-import UIComponentNew from '../UIComponentNew';
-import './MenuItem.css';
+import UIComponentNew from '../UIComponent';
+import './MenuItem.scss';
 
 export default class MenuItem extends UIComponentNew {
     constructor(private readonly menuItemText:string) {
