@@ -1,9 +1,13 @@
 import UIComponentProps from "../../../UI Components/Interfaces/UIComponentProps";
-import UIComponentNew from "../../../UI Components/UIComponentNew";
+import UIComponentNew from "../../../UI Components/UIComponent";
 import ChatGPT from "../../ChatGPT";
-import './RetryButton.css';
+import './RetryButton.scss';
 
 export default class RetryButton extends UIComponentNew {
+    constructor() {
+        super();
+    }
+
     override _template(): UITemplate<UIComponentProps> {
         const div = document.createElement('div');
         div.textContent = 'Retry';
@@ -12,7 +16,7 @@ export default class RetryButton extends UIComponentNew {
     }
 
     override _ready():void {
-        this._body.element.addEventListener('click', () => {
+        this._body?.element?.addEventListener('click', () => {
             ChatGPT.turn(false);
             ChatGPT.turn(true);
         });

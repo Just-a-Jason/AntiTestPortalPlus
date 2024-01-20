@@ -1,9 +1,9 @@
 import AssetsLoader from "../../Helpers/AssetsLoader/AssetsLoader";
 import UIComponentProps from "../Interfaces/UIComponentProps";
-import UIComponentNew from "../UIComponentNew";
+import UIComponentNew from "../UIComponent";
 import MenuItem from "../MenuItem/MenuItem";
 import Slider from "../Slider/Slider";
-import './SettingsBox.css';
+import './SettingsBox.scss';
 
 
 interface SliderProps extends UIComponentProps {

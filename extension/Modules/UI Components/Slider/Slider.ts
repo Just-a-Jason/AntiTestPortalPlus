@@ -1,9 +1,9 @@
 import UIComponentProps from "../Interfaces/UIComponentProps";
-import UIComponentNew from "../UIComponentNew";
+import UIComponentNew from "../UIComponent";
 import ChatGPT from "../../ChatGPT/ChatGPT";
 import PeterTV from "../../PeterTV/PeterTV";
 import AntiBlur from "../../Blur/AntiBlur";
-import './Slider.css';
+import './Slider.scss';
 
 interface ISliderProps extends UIComponentProps {
     sliderState:HTMLElement;
@@ -11,6 +11,11 @@ interface ISliderProps extends UIComponentProps {
 
 export default class Slider extends UIComponentNew<ISliderProps> {
   private _on:boolean = false;
+
+  constructor(private _settingKey:SettingKey) {
+    super();
+    this._ready();
+  }
 
   override _template(): UITemplate<ISliderProps> {
     const sliderContainer = document.createElement('div');
@@ -28,9 +33,7 @@ export default class Slider extends UIComponentNew<ISliderProps> {
     };
   }
 
-  constructor(private _settingKey:SettingKey) {
-    super();
-
+  protected override _ready(): void {
     if (localStorage.getItem(this._settingKey)) this._on = JSON.parse(localStorage.getItem(this._settingKey)!);
     
     this.setState(this._on);

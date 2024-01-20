@@ -1,7 +1,7 @@
 import UIComponentProps from "../../UI Components/Interfaces/UIComponentProps";
 import AssetsLoader from "../../Helpers/AssetsLoader/AssetsLoader";
-import UIComponentNew from "../../UI Components/UIComponentNew";
-import './VideoWindow.css';
+import UIComponentNew from "../../UI Components/UIComponent";
+import './VideoWindow.scss';
 
 interface VideoWindowProps extends UIComponentProps {
   video:HTMLVideoElement;
