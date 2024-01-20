@@ -1,6 +1,6 @@
 import UIComponentProps from "../../../UI Components/Interfaces/UIComponentProps";
-import UIComponentNew from "../../../UI Components/UIComponentNew";
-import './ChatGPTError.css';
+import UIComponentNew from "../../../UI Components/UIComponent";
+import './ChatGPTError.scss';
 
 export default class ChatGPTError extends UIComponentNew {
     protected override _template(): UITemplate<UIComponentProps> {

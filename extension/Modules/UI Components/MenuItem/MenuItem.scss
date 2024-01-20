@@ -6,8 +6,8 @@
     cursor: pointer;
     padding: 10px;
     color:#000;
-}
-  
-.menu-item:last-child {
-    border-bottom: none;
+
+    &:last-child {
+        border-bottom: none;
+    }
 }

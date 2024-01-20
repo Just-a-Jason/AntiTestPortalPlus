@@ -1,16 +1,15 @@
 import UIComponentProps from "../../UI Components/Interfaces/UIComponentProps";
 import AssetsLoader from "../../Helpers/AssetsLoader/AssetsLoader";
-import UIComponentNew from "../../UI Components/UIComponentNew";
-import './VideoWindow.css';
+import UIComponentNew from "../../UI Components/UIComponent";
+import './VideoWindow.scss';
 
 interface VideoWindowProps extends UIComponentProps {
   video:HTMLVideoElement;
 }
 
 export default class VideoWindow extends UIComponentNew<VideoWindowProps> {
-  private selected:boolean = false;
   private currentVideo = 0;
-  private maxVideos = 2;
+  private maxVideos = 10;
   
   setPosition(position: {x:number, y: number}):void {
     const x = position.x - (this._body.element.clientWidth/2)+ 'px';
@@ -20,7 +19,7 @@ export default class VideoWindow extends UIComponentNew<VideoWindowProps> {
     this._body.element.style['top'] = y;
   }
 
-  override _template() : UITemplate<VideoWindowProps>{
+  protected override _template() : UITemplate<VideoWindowProps>{
       const peterTV = document.createElement('div');
       peterTV.className = 'PeterTV';
 

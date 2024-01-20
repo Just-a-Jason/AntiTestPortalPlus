@@ -1,6 +1,6 @@
 import UIComponentProps from "../../../UI Components/Interfaces/UIComponentProps";
-import UIComponentNew from "../../../UI Components/UIComponentNew";
-import './LoadingSpinner.css';
+import UIComponentNew from "../../../UI Components/UIComponent";
+import './LoadingSpinner.scss';
 
 export default class Spinner extends UIComponentNew {
     override _template(): UITemplate<UIComponentProps> {

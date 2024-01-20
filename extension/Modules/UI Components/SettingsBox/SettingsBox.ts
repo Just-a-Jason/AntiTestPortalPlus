@@ -1,9 +1,9 @@
 import AssetsLoader from "../../Helpers/AssetsLoader/AssetsLoader";
 import UIComponentProps from "../Interfaces/UIComponentProps";
-import UIComponentNew from "../UIComponentNew";
+import UIComponentNew from "../UIComponent";
 import MenuItem from "../MenuItem/MenuItem";
 import Slider from "../Slider/Slider";
-import './SettingsBox.css';
+import './SettingsBox.scss';
 
 
 interface SliderProps extends UIComponentProps {
@@ -49,13 +49,12 @@ export default class SettingsBox extends UIComponentNew<SliderProps> {
   }
 
   private addSliders():void {
-    const menuItems = ['Anti Blur 🫧', 'chatGPT 🤖', 'Image Search 🖼️🔍', 'Question Search ❓🔍', 'PeterTV 📺'];
+    const menuItems = ['Anti Blur 🫧', 'chatGPT 🤖', 'Question Search ❓🔍', 'PeterTV 📺'];
     const menu = this._body.structure?.menu;
     
     const _keys:Map<SettingKey, string> = new Map([
       ['antiBlur_Module', 'true'],
       ['chatGPT_Module', 'false'],
-      ['imageSearch_Module', 'false'],
       ['questionSearch_Module', 'true'],
       ['peterTV_Module', 'false']
     ]);
