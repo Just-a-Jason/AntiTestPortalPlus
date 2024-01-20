@@ -1,6 +1,7 @@
+import { createElement } from "../../Helpers/HtmlHelper/HtmlHelper";
 import AssetsLoader from "../../Helpers/AssetsLoader/AssetsLoader";
 import UIComponentProps from "../Interfaces/UIComponentProps";
-import UIComponentNew from "../UIComponent";
+import UIComponent from "../UIComponent";
 import MenuItem from "../MenuItem/MenuItem";
 import Slider from "../Slider/Slider";
 import './SettingsBox.scss';
@@ -10,21 +11,21 @@ interface SliderProps extends UIComponentProps {
   menu:HTMLElement
 }
 
-export default class SettingsBox extends UIComponentNew<SliderProps> {
+export default class SettingsBox extends UIComponent<SliderProps> {
 
   protected override _template(): UITemplate<SliderProps> {
-      const widgetContainer = document.createElement('div');
+      const widgetContainer = createElement('div');
       widgetContainer.classList.add('SettingsBox');
       document.body.appendChild(widgetContainer);
 
-      const widgetMenu = document.createElement('div');
+      const widgetMenu = createElement('div');
       widgetMenu.id = 'widget-menu';
       widgetContainer.appendChild(widgetMenu);
 
-      const widgetText = document.createElement('div');
+      const widgetText = createElement('div');
       widgetText.id = 'widget-text';
 
-      const image = document.createElement('img');
+      const image = createElement('img') as HTMLImageElement;
       image.src = AssetsLoader.LoadAsset('logo.png');
       image.classList.add('SettingsBox__image');
 

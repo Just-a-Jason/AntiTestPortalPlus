@@ -3,3 +3,6 @@ export default class HtmlHelper {
         element.childNodes?.forEach(node => node.remove());
     }
 }
+export function createElement(element:keyof HTMLElementTagNameMap) {
+    return document.createElement(element);
+}
