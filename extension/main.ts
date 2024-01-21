@@ -4,4 +4,4 @@ const main = ():void => {
     new AntiTestportalPlus("Chrome");
 }
 
-window.addEventListener('load', main);
+main();

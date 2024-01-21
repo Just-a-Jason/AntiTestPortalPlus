@@ -7,6 +7,7 @@ import './RetryButton.scss';
 export default class RetryButton extends UIComponent {
     constructor() {
         super();
+        this._ready();
     }
 
     override _template(): UITemplate<UIComponentProps> {

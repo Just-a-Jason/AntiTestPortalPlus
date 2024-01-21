@@ -26,7 +26,7 @@ export default class SettingsBox extends UIComponent<SliderProps> {
       widgetText.id = 'widget-text';
 
       const image = createElement('img') as HTMLImageElement;
-      image.src = Extension.runtime.loadAsset('Assets\\logo.png');
+      image.src = Extension.runtime.loadAsset('Assets/logo.png');
       image.classList.add('SettingsBox__image');
 
       widgetText.appendChild(image);

@@ -20,6 +20,7 @@
   }
 
   &__image {
+    height: 25px;
     width: 25px;
   }
 }
@@ -32,6 +33,10 @@
     display: flex;
     height: 20px;
     width: 20px;
+
+    justify-content: center;
+    align-items: center;
+    display: flex;
   }
 
   &-menu {

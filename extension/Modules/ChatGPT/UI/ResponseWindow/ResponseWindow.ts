@@ -23,7 +23,7 @@ export default class ResponseWindow extends UIComponent<ResponseWindowProps> {
 
         const imageElement = createElement('img') as HTMLImageElement;
         
-        imageElement.src = ExtensionApi.runtime.loadAsset('Assets\\chat-logo.png');
+        imageElement.src = ExtensionApi.runtime.loadAsset('Assets/chat-logo.png');
         
         imageElement.alt = 'chat gpt logo';
         imageElement.className = 'ChatGPTResponse__Image';
