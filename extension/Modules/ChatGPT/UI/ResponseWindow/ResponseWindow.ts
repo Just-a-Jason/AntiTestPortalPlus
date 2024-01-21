@@ -1,8 +1,8 @@
 import UIComponentProps from "../../../UI Components/Interfaces/UIComponentProps";
-import UIComponent from "../../../UI Components/UIComponent";
-import AssetsLoader from "../../../Helpers/AssetsLoader/AssetsLoader";
 import HtmlHelper, { createElement } from "../../../Helpers/HtmlHelper/HtmlHelper";
+import UIComponent from "../../../UI Components/UIComponent";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
+import ExtensionApi from "../../../Extension/ExtensionApi";
 import ChatGPTError from "../ChatGPTError/ChatGPTError";
 import RetryButton from "../RetryButton/RetryButton";
 import './ResponseWindow.scss';
@@ -23,7 +23,7 @@ export default class ResponseWindow extends UIComponent<ResponseWindowProps> {
 
         const imageElement = createElement('img') as HTMLImageElement;
         
-        imageElement.src = AssetsLoader.LoadAsset('chat-logo.png');
+        imageElement.src = ExtensionApi.runtime.loadAsset('Assets\\chat-logo.png');
         
         imageElement.alt = 'chat gpt logo';
         imageElement.className = 'ChatGPTResponse__Image';

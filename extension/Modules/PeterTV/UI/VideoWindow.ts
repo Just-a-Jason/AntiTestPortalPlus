@@ -3,6 +3,7 @@ import AssetsLoader from "../../Helpers/AssetsLoader/AssetsLoader";
 import UIComponent from "../../UI Components/UIComponent";
 import './VideoWindow.scss';
 import { createElement } from "../../Helpers/HtmlHelper/HtmlHelper";
+import Extension from "../../Extension/ExtensionApi";
 
 interface VideoWindowProps extends UIComponentProps {
   video:HTMLVideoElement;
@@ -25,12 +26,12 @@ export default class VideoWindow extends UIComponent<VideoWindowProps> {
       peterTV.className = 'PeterTV';
 
       const image = createElement('img') as HTMLImageElement;
-      image.src = AssetsLoader.LoadAsset('PeterTV/peterTv.png');
+      image.src = Extension.runtime.loadAsset('Assets\\PeterTV\\peterTv.png');
       image.alt = 'peterTV';
       image.className = 'PeterTV__TVImage';
 
       const video = createElement('video') as HTMLVideoElement;
-      video.src = AssetsLoader.LoadAsset(`PeterTV/vid_${this.currentVideo || 0}.mp4`);
+      video.src = Extension.runtime.loadAsset(`Assets\\PeterTV\\vid_${this.currentVideo || 0}.mp4`);
 
       video.addEventListener('ended' , () => this.nextVideo());
 
@@ -52,7 +53,7 @@ export default class VideoWindow extends UIComponent<VideoWindowProps> {
   private nextVideo():void {
     this.currentVideo++;
     this.currentVideo %= this.maxVideos;
-    this._body.structure!.video.src = AssetsLoader.LoadAsset(`PeterTV/vid_${this.currentVideo}.mp4`);
+    this._body.structure!.video.src = Extension.runtime.loadAsset(`Assets\\PeterTV\\vid_${this.currentVideo}.mp4`);
   }
 }
 

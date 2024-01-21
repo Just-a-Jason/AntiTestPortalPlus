@@ -1,8 +1,8 @@
 import { createElement } from "../../Helpers/HtmlHelper/HtmlHelper";
-import AssetsLoader from "../../Helpers/AssetsLoader/AssetsLoader";
 import UIComponentProps from "../Interfaces/UIComponentProps";
-import UIComponent from "../UIComponent";
+import Extension from "../../Extension/ExtensionApi";
 import MenuItem from "../MenuItem/MenuItem";
+import UIComponent from "../UIComponent";
 import Slider from "../Slider/Slider";
 import './SettingsBox.scss';
 
@@ -26,7 +26,7 @@ export default class SettingsBox extends UIComponent<SliderProps> {
       widgetText.id = 'widget-text';
 
       const image = createElement('img') as HTMLImageElement;
-      image.src = AssetsLoader.LoadAsset('logo.png');
+      image.src = Extension.runtime.loadAsset('Assets\\logo.png');
       image.classList.add('SettingsBox__image');
 
       widgetText.appendChild(image);
