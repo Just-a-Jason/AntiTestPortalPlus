@@ -1,13 +1,15 @@
 import UIComponentProps from "../../UI Components/Interfaces/UIComponentProps";
 import AssetsLoader from "../../Helpers/AssetsLoader/AssetsLoader";
-import UIComponentNew from "../../UI Components/UIComponent";
+import UIComponent from "../../UI Components/UIComponent";
 import './VideoWindow.scss';
+import { createElement } from "../../Helpers/HtmlHelper/HtmlHelper";
+import Extension from "../../Extension/ExtensionApi";
 
 interface VideoWindowProps extends UIComponentProps {
   video:HTMLVideoElement;
 }
 
-export default class VideoWindow extends UIComponentNew<VideoWindowProps> {
+export default class VideoWindow extends UIComponent<VideoWindowProps> {
   private currentVideo = 0;
   private maxVideos = 10;
   
@@ -20,16 +22,16 @@ export default class VideoWindow extends UIComponentNew<VideoWindowProps> {
   }
 
   protected override _template() : UITemplate<VideoWindowProps>{
-      const peterTV = document.createElement('div');
+      const peterTV = createElement('div');
       peterTV.className = 'PeterTV';
 
-      const image = document.createElement('img');
-      image.src = AssetsLoader.LoadAsset('PeterTV/peterTv.png');
+      const image = createElement('img') as HTMLImageElement;
+      image.src = Extension.runtime.loadAsset('Assets\\PeterTV\\peterTv.png');
       image.alt = 'peterTV';
       image.className = 'PeterTV__TVImage';
 
-      const video = document.createElement('video');
-      video.src = AssetsLoader.LoadAsset(`PeterTV/vid_${this.currentVideo || 0}.mp4`);
+      const video = createElement('video') as HTMLVideoElement;
+      video.src = Extension.runtime.loadAsset(`Assets\\PeterTV\\vid_${this.currentVideo || 0}.mp4`);
 
       video.addEventListener('ended' , () => this.nextVideo());
 
@@ -51,7 +53,7 @@ export default class VideoWindow extends UIComponentNew<VideoWindowProps> {
   private nextVideo():void {
     this.currentVideo++;
     this.currentVideo %= this.maxVideos;
-    this._body.structure!.video.src = AssetsLoader.LoadAsset(`PeterTV/vid_${this.currentVideo}.mp4`);
+    this._body.structure!.video.src = Extension.runtime.loadAsset(`Assets\\PeterTV\\vid_${this.currentVideo}.mp4`);
   }
 }
 

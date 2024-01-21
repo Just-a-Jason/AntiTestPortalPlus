@@ -1,6 +1,6 @@
 import UIComponentProps from "./Interfaces/UIComponentProps";
 
-export default abstract class UIComponentNew<Props extends UIComponentProps = UIComponentProps> {
+export default abstract class UIComponent<Props extends UIComponentProps = UIComponentProps> {
     protected _body: UITemplate<Props>;
 
     constructor() {

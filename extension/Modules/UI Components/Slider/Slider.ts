@@ -1,15 +1,16 @@
+import { createElement } from "../../Helpers/HtmlHelper/HtmlHelper";
 import UIComponentProps from "../Interfaces/UIComponentProps";
-import UIComponentNew from "../UIComponent";
 import ChatGPT from "../../ChatGPT/ChatGPT";
 import PeterTV from "../../PeterTV/PeterTV";
 import AntiBlur from "../../Blur/AntiBlur";
+import UIComponent from "../UIComponent";
 import './Slider.scss';
 
 interface ISliderProps extends UIComponentProps {
     sliderState:HTMLElement;
 }
 
-export default class Slider extends UIComponentNew<ISliderProps> {
+export default class Slider extends UIComponent<ISliderProps> {
   private _on:boolean = false;
 
   constructor(private _settingKey:SettingKey) {
@@ -18,11 +19,11 @@ export default class Slider extends UIComponentNew<ISliderProps> {
   }
 
   override _template(): UITemplate<ISliderProps> {
-    const sliderContainer = document.createElement('div');
+    const sliderContainer = createElement('div');
     sliderContainer.className = 'slider';
     document.body.appendChild(sliderContainer);
 
-    const sliderSet = document.createElement('div');
+    const sliderSet = createElement('div');
     sliderSet.className = 'slider__set';
     sliderContainer.appendChild(sliderSet);
     return {

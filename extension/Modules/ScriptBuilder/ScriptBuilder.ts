@@ -1,8 +1,9 @@
+import { createElement } from "../Helpers/HtmlHelper/HtmlHelper";
 import DomInserter from "../DomInserter/DomInserter";
 
 export default abstract class ScriptBuilder {
     static build(content: string | object | Function, insertBefore:boolean=false):HTMLScriptElement {
-        const script = document.createElement('script');
+        const script = createElement('script') as HTMLScriptElement;
         script.type = 'text/javascript';
 
         if (typeof(content) === 'string') script.textContent = content;
