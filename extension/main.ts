@@ -4,4 +4,4 @@ const main = ():void => {
     new AntiTestportalPlus("FireFox");
 }
 
-window.addEventListener('load', main);
+main();
