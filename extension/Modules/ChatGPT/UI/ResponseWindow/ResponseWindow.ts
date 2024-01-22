@@ -1,5 +1,5 @@
 import UIComponentProps from "../../../UI Components/Interfaces/UIComponentProps";
-import HtmlHelper, { createElement } from "../../../Helpers/HtmlHelper/HtmlHelper";
+import HtmlHelper, { createElement, parseUIComponent } from "../../../Helpers/HtmlHelper/HtmlHelper";
 import UIComponent from "../../../UI Components/UIComponent";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 import ExtensionApi from "../../../Extension/ExtensionApi";
@@ -38,7 +38,7 @@ export default class ResponseWindow extends UIComponent<ResponseWindowProps> {
         bodySection.className = 'ChatGPTResponse__Body';
 
         const spinner = new LoadingSpinner();
-        bodySection.appendChild(spinner._getBody().element);
+        bodySection.appendChild(parseUIComponent(spinner));
 
         const footerSection = createElement('footer');
         footerSection.className = 'ChatGPTResponse__Footer';
@@ -69,8 +69,8 @@ export default class ResponseWindow extends UIComponent<ResponseWindowProps> {
             const button = new RetryButton();
     
             HtmlHelper.removeAllChild(this._body.structure.responseBody!);
-            this._body.structure?.responseBody.appendChild(error._getBody().element);
-            this._body.structure?.responseBody.appendChild(button._getBody().element);
+            this._body.structure?.responseBody.appendChild(parseUIComponent(error));
+            this._body.structure?.responseBody.appendChild(parseUIComponent(button));
         }
     }
 }

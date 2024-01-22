@@ -1,10 +1,11 @@
-import { createElement } from "../../Helpers/HtmlHelper/HtmlHelper";
+import { createElement, parseUIComponent } from "../../Helpers/HtmlHelper/HtmlHelper";
 import UIComponentProps from "../Interfaces/UIComponentProps";
 import Extension from "../../Extension/ExtensionApi";
 import MenuItem from "../MenuItem/MenuItem";
 import UIComponent from "../UIComponent";
 import Slider from "../Slider/Slider";
 import './SettingsBox.scss';
+import SettingsButton from "../SettingsButton/SettingsButton";
 
 
 interface SliderProps extends UIComponentProps {
@@ -65,11 +66,23 @@ export default class SettingsBox extends UIComponent<SliderProps> {
       if(!localStorage.getItem(key)) 
       localStorage.setItem(key, _keys.get(key)!);
 
-      const menuItem = new MenuItem(menuItems[idx++]);
-      const slider = new Slider(key);
-      menuItem.appendChild(slider._getBody().element);
+    const menuItem = new MenuItem(menuItems[idx++]);
+    const slider = new Slider(key);
 
-      menu?.appendChild(menuItem._getBody().element);
+      if (key === 'chatGPT_Module') {
+        const container = createElement('div');
+        container.classList.add('flex-container');
+        
+        const settingsButton = new SettingsButton();
+        
+        container.appendChild(parseUIComponent(settingsButton));
+        container.appendChild(parseUIComponent(slider));
+        menuItem.appendChild(container);
+      }
+      else menuItem.appendChild(slider);
+      
+
+      menu?.appendChild(parseUIComponent(menuItem));
     }
   }
 

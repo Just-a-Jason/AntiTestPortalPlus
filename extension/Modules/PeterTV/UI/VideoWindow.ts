@@ -1,9 +1,8 @@
 import UIComponentProps from "../../UI Components/Interfaces/UIComponentProps";
-import AssetsLoader from "../../Helpers/AssetsLoader/AssetsLoader";
-import UIComponent from "../../UI Components/UIComponent";
-import './VideoWindow.scss';
 import { createElement } from "../../Helpers/HtmlHelper/HtmlHelper";
+import UIComponent from "../../UI Components/UIComponent";
 import Extension from "../../Extension/ExtensionApi";
+import './VideoWindow.scss';
 
 interface VideoWindowProps extends UIComponentProps {
   video:HTMLVideoElement;

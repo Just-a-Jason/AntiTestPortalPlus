@@ -7,8 +7,9 @@ export default abstract class UIComponent<Props extends UIComponentProps = UICom
        this._body = this.initTemplate();
     }
 
-    appendChild(child: HTMLElement): void {
-        this._body.element.appendChild(child);
+    appendChild(child: HTMLElement | UIComponent): void {
+        if (child instanceof UIComponent) this._body.element.appendChild(child._body.element);
+        else this._body.element.appendChild(child);
     }
 
     _getBody(): UITemplate<Props> {
