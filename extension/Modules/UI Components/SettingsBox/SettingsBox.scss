@@ -56,3 +56,10 @@
     }
   }
 }
+
+.flex-container {
+  flex-direction: row-reverse;
+  justify-content: left;
+  align-items: center;
+  display: flex;
+}
