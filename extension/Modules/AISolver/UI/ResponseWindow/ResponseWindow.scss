@@ -2,12 +2,8 @@ $bg-color-primary: #171717;
 $bg-color-secondary: #222;
 $border-color: #464646;
 
-@keyframes spin {
-    from {transform: rotate(0deg);}
-    to {transform: rotate(360deg);}
-}
-
 .ChatGPTResponse {
+    user-select: none;
     border-radius: 20px 20px 0px 0px ;
     box-shadow: 2px 2px 15px #000;
     background-color: $bg-color-primary;
@@ -18,9 +14,8 @@ $border-color: #464646;
     width: 250px;
 
     &__Image {
-        animation: spin 4s infinite;
-        height: 20px;
-        width: 20px;
+        height: 40px;
+        width: 40px;
     }
 
     &__Header {

@@ -1,93 +1,122 @@
-import { createElement, parseUIComponent } from "../../Helpers/HtmlHelper/HtmlHelper";
+import {
+  createElement,
+  load,
+  parseUIComponent,
+  save,
+} from "../../Helpers/HtmlHelper/HtmlHelper";
 import UIComponentProps from "../Interfaces/UIComponentProps";
-import Extension from "../../Extension/ExtensionApi";
+import BrowserAPI from "../../Browser API/BrowserAPI";
 import MenuItem from "../MenuItem/MenuItem";
 import UIComponent from "../UIComponent";
 import Slider from "../Slider/Slider";
-import './SettingsBox.scss';
-import SettingsButton from "../SettingsButton/SettingsButton";
+import "./SettingsBox.scss";
+import DomInserter from "../../DomInserter/DomInserter";
+import AntiBlur from "../../Blur/AntiBlur";
+import AISolver from "../../AISolver/AISolver";
+import PeterTV from "../../PeterTV/PeterTV";
+import GoogleSearch from "../../QuestionSearch/QuestionSearch";
 
+interface MenuItemData {
+  defaultValue: any;
+  name: string;
+}
 
 interface SliderProps extends UIComponentProps {
-  menu:HTMLElement
+  menu: HTMLElement;
 }
 
 export default class SettingsBox extends UIComponent<SliderProps> {
+  private visible: boolean = false;
 
-  protected override _template(): UITemplate<SliderProps> {
-      const widgetContainer = createElement('div');
-      widgetContainer.classList.add('SettingsBox');
-      document.body.appendChild(widgetContainer);
+  protected override template(): UITemplate<SliderProps> {
+    const box = createElement("div");
+    box.classList.add("settings-box");
+    DomInserter.insert(box);
 
-      const widgetMenu = createElement('div');
-      widgetMenu.id = 'widget-menu';
-      widgetContainer.appendChild(widgetMenu);
+    const menu = createElement("div");
+    menu.id = "widget-menu";
+    box.appendChild(menu);
 
-      const widgetText = createElement('div');
-      widgetText.id = 'widget-text';
+    const button = createElement("div");
+    button.id = "widget-button";
 
-      const image = createElement('img') as HTMLImageElement;
-      image.src = Extension.runtime.loadAsset('Assets/logo.png');
-      image.classList.add('SettingsBox__image');
+    const logo = createElement("img") as HTMLImageElement;
 
-      widgetText.appendChild(image);
-      widgetContainer.appendChild(widgetText);
+    logo.src = BrowserAPI.loadAsset("Assets/Icons/logo.png");
+    logo.draggable = false;
+    logo.classList.add("SettingsBox__image");
 
-      widgetText.addEventListener('click', () => {
-        widgetMenu.classList.toggle('menuVisible');
-      });
-      
-      return {
-        element: widgetContainer, 
-        structure: {
-          menu: widgetMenu
-        }
-      };
+    button.appendChild(logo);
+    box.appendChild(button);
+
+    button.addEventListener("click", () => {
+      menu.classList.toggle("visible");
+      this.visible = menu.classList.contains("visible");
+      save("com.runtimedevstudios.anti-testportal+.window-open", this.visible);
+    });
+
+    if (this.get("com.runtimedevstudios.anti-testportal+.window-open")) {
+      menu.classList.add("visible");
+      this.visible = true;
+    }
+
+    return {
+      element: box,
+      structure: {
+        menu: menu,
+      },
+    };
   }
 
-  constructor() {
-    super();
-    this.addSliders();
-  }
+  private loadSliders(): void {
+    const menu = this.body.structure?.menu;
 
-  private addSliders():void {
-    const menuItems = ['Anti Blur 🫧', 'chatGPT 🤖', 'Question Search ❓🔍', 'PeterTV 📺'];
-    const menu = this._body.structure?.menu;
-    
-    const _keys:Map<SettingKey, string> = new Map([
-      ['antiBlur_Module', 'true'],
-      ['chatGPT_Module', 'false'],
-      ['questionSearch_Module', 'true'],
-      ['peterTV_Module', 'false']
+    const items = new Map<SettingKey, MenuItemData>([
+      [
+        "com.runtimedevstudios.anti-testportal+.blur",
+        { name: "Anti Blur 🫧", defaultValue: true },
+      ],
+      [
+        "com.runtimedevstudios.anti-testportal+.ai-solver",
+        { name: "AI Solver 🤖", defaultValue: true },
+      ],
+      [
+        "com.runtimedevstudios.anti-testportal+.peter-tv",
+        { name: "PeterTV 📺", defaultValue: false },
+      ],
+      [
+        "com.runtimedevstudios.anti-testportal+.google-search",
+        {
+          name: "Google Search 🔍",
+          defaultValue: true,
+        },
+      ],
     ]);
 
-    let idx = 0;
-    for (const key of _keys.keys()) {
-      if(!localStorage.getItem(key)) 
-      localStorage.setItem(key, _keys.get(key)!);
+    items.forEach((v, k) => {
+      if (!localStorage.getItem(k)) save(k, v.defaultValue);
+      const item = new MenuItem(v.name);
+      const slider = new Slider(k);
 
-    const menuItem = new MenuItem(menuItems[idx++]);
-    const slider = new Slider(key);
-
-      if (key === 'chatGPT_Module') {
-        const container = createElement('div');
-        container.classList.add('flex-container');
-        
-        const settingsButton = new SettingsButton();
-        
-        container.appendChild(parseUIComponent(settingsButton));
-        container.appendChild(parseUIComponent(slider));
-        menuItem.appendChild(container);
-      }
-      else menuItem.appendChild(slider);
-      
-
-      menu?.appendChild(parseUIComponent(menuItem));
-    }
+      item.appendChild(slider);
+      menu!.appendChild(parseUIComponent(item));
+    });
   }
 
-  getSettingsValue(key:SettingKey):boolean {
-    if(!localStorage.getItem(key)) return false;
-    else return JSON.parse(localStorage.getItem(key)!);
+  public get(key: SettingKey): boolean {
+    if (!localStorage.getItem(key)) return false;
+    else return load(key);
+  }
+
+  public loadSettings() {
+    GoogleSearch.turn(
+      this.get("com.runtimedevstudios.anti-testportal+.google-search")
+    );
+
+    AntiBlur.turn(this.get("com.runtimedevstudios.anti-testportal+.blur"));
+    AISolver.turn(this.get("com.runtimedevstudios.anti-testportal+.ai-solver"));
+    PeterTV.turn(this.get("com.runtimedevstudios.anti-testportal+.peter-tv"));
+
+    this.loadSliders();
   }
 }

@@ -1,79 +1,75 @@
 import { createElement } from "../../Helpers/HtmlHelper/HtmlHelper";
 import UIComponentProps from "../Interfaces/UIComponentProps";
-import ChatGPT from "../../ChatGPT/ChatGPT";
+import AISolver from "../../AISolver/AISolver";
 import PeterTV from "../../PeterTV/PeterTV";
 import AntiBlur from "../../Blur/AntiBlur";
 import UIComponent from "../UIComponent";
-import './Slider.scss';
+import "./Slider.scss";
 
 interface ISliderProps extends UIComponentProps {
-    sliderState:HTMLElement;
+  sliderSet: HTMLElement;
 }
 
 export default class Slider extends UIComponent<ISliderProps> {
-  private _on:boolean = false;
-
-  constructor(private _settingKey:SettingKey) {
+  constructor(private key: SettingKey, private on: boolean = false) {
     super();
-    this._ready();
+    this.ready();
   }
 
-  override _template(): UITemplate<ISliderProps> {
-    const sliderContainer = createElement('div');
-    sliderContainer.className = 'slider';
+  override template(): UITemplate<ISliderProps> {
+    const sliderContainer = createElement("div");
+    sliderContainer.className = "slider";
     document.body.appendChild(sliderContainer);
 
-    const sliderSet = createElement('div');
-    sliderSet.className = 'slider__set';
+    const sliderSet = createElement("div");
+    sliderSet.className = "slider__set";
     sliderContainer.appendChild(sliderSet);
     return {
-      element:sliderContainer, 
+      element: sliderContainer,
       structure: {
-        sliderState:sliderSet
-      }
+        sliderSet: sliderSet,
+      },
     };
   }
 
-  protected override _ready(): void {
-    if (localStorage.getItem(this._settingKey)) this._on = JSON.parse(localStorage.getItem(this._settingKey)!);
-    
-    this.setState(this._on);
-    
-    this._body.element.addEventListener('click', (e) => {
-      this.setState(!this._on);
+  protected override ready(): void {
+    if (localStorage.getItem(this.key))
+      this.on = JSON.parse(localStorage.getItem(this.key)!);
+
+    this.setState(this.on);
+
+    this.body.element.addEventListener("click", () => {
+      this.setState(!this.on);
       this.setSettingState();
 
-      if(this._settingKey == "peterTV_Module") {
-          PeterTV.turn(this._on, {
-            x: e.pageX,
-            y: e.pageY
-          });
+      if (this.key == "com.runtimedevstudios.anti-testportal+.peter-tv") {
+        PeterTV.turn(this.on);
       }
     });
   }
 
-  private setState(_state:boolean):void {
-    let state = (_state) ?  120 : 0;
-    
-    if(_state) this._body.element.classList.add('on');
-    else this._body.element.classList.remove('on');
-        
-    this._body.structure!.sliderState.style['transform'] = `translateX(${state}%)`;
-    this._on = _state;
+  private setState(state: boolean): void {
+    let isOn = state ? 120 : 0;
+
+    if (state) this.body.element.classList.add("on");
+    else this.body.element.classList.remove("on");
+
+    this.body.structure!.sliderSet.style["transform"] = `translateX(${isOn}%)`;
+    this.on = state;
   }
 
-  private setSettingState():void {
-    localStorage.setItem(this._settingKey, (this._on) ? 'true' : 'false');
+  private setSettingState(): void {
+    localStorage.setItem(this.key, this.on ? "true" : "false");
 
-    this.setState(JSON.parse(localStorage.getItem(this._settingKey)!));
-    
-    switch (this._settingKey) {
-      case 'antiBlur_Module':
-        AntiBlur.turn(this._on);
-      break;
-      case 'chatGPT_Module':
-        ChatGPT.turn(this._on);
-      break;
+    this.setState(JSON.parse(localStorage.getItem(this.key)!));
+
+    switch (this.key) {
+      case "com.runtimedevstudios.anti-testportal+.blur":
+        AntiBlur.turn(this.on);
+        break;
+      case "com.runtimedevstudios.anti-testportal+.ai-solver":
+        AISolver.turn(this.on);
+        break;
     }
   }
 }

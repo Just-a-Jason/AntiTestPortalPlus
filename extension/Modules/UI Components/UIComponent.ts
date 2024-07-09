@@ -1,32 +1,35 @@
 import UIComponentProps from "./Interfaces/UIComponentProps";
 
-export default abstract class UIComponent<Props extends UIComponentProps = UIComponentProps> {
-    protected _body: UITemplate<Props>;
+export default abstract class UIComponent<
+  Props extends UIComponentProps = UIComponentProps
+> {
+  protected body: UITemplate<Props>;
 
-    constructor() {
-       this._body = this.initTemplate();
-    }
+  public constructor() {
+    this.body = this.initTemplate();
+  }
 
-    appendChild(child: HTMLElement | UIComponent): void {
-        if (child instanceof UIComponent) this._body.element.appendChild(child._body.element);
-        else this._body.element.appendChild(child);
-    }
+  public appendChild(child: HTMLElement | UIComponent): void {
+    if (child instanceof UIComponent)
+      this.body.element.appendChild(child.body.element);
+    else this.body.element.appendChild(child);
+  }
 
-    _getBody(): UITemplate<Props> {
-        return this._body;
-    }
+  public getBody(): UITemplate<Props> {
+    return this.body;
+  }
 
-    _remove(): void {
-        this._body.element.remove();
-        this._done();
-    }
+  public remove(): void {
+    this.body.element.remove();
+    this.done();
+  }
 
-    private initTemplate():UITemplate<Props> {
-        return this._template();
-    }
+  private initTemplate(): UITemplate<Props> {
+    return this.template();
+  }
 
-    protected _done():void {}
+  protected done(): void {}
 
-    protected abstract _template(): UITemplate<Props>;
-    protected _ready():void {};
+  protected abstract template(): UITemplate<Props>;
+  protected ready(): void {}
 }

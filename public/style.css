@@ -1,60 +1,81 @@
-:root {
-    --shadow: 2px 2px 10px #000;
-}
-body {
-    font-family: system-ui;
-    background: #222;
-    height: 400px;
-    width: 400px;
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap');
+* {
+    box-sizing: border-box;
     margin: 0;
 }
 
+body {
+    font-family: monospace;
+    height: 400px;
+    width: 400px;
+    border-radius: 10px;
+    user-select: none;
+}
+
+
 header {
-    border-bottom: solid 2px #680a72;
-    box-shadow: var(--shadow);
+    color: #000;
+    background-color: #B4D4FF;
+    font-weight: normal;
+    padding: 10px;
+    display: flex;
     justify-content: space-around;
     align-items: center;
-    background: #555;
-    display: flex;
-    height: 50px;
+    height: 20%;
+    border-radius: 10px 10px 0px 0px;
+}
+main {
+    height: 100%;
+    border: solid 3px #176B87;
+    border-radius: 10px;
+}
+main .about {
+    height: 90%;
+    padding: 10px;
+    overflow-y: scroll;
 }
 
-header p {
-    color: #161516;
-    font-size: 25px;
-}
-
-header img {
-    width: 40px;
-    height: 40px;
-}
 
 footer {
-    border-top: solid 2px #680a72;
-    box-shadow: var(--shadow);
-    text-align: center;
-    background: #555;
+    background-color: #B4D4FF;
+    display: flex;
     padding: 10px;
-    color: #fff;
+    justify-content: space-around;
+    align-items: center;
+    height: 10%;
+    border-radius:  0px 0px 10px 10px;
 }
 
-section.options {
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    height: 300px;
+footer p {
+    font-size: 15px;
+}
+
+
+li {
+    padding: 10px;
+    cursor: pointer;
+    border: solid 2px #000;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+li p {
+    border-top: solid 2px #c3c3c3;
+    margin-top: 5px;
+    padding: 10px;
+    font-size: 20px;
+}
+
+li span {
+    font-size: 20px;
+    
     width: 100%;
 }
-
-section.options img {
-    height: 100px;
-    width: 100px;
-    transition: 0.3s;
+footer img {
+    width: 20px;
+    height: 20px;
 }
 
-section.options img:hover {
-    filter: drop-shadow(2px 2px 20px #ffffff8e);
-    cursor: pointer;
-    height: 200px;
-    width: 200px;
+ul {
+    list-style: none;
+    padding: 0;
 }

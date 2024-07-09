@@ -1,1 +1,6 @@
-type SettingKey = 'antiBlur_Module' | 'chatGPT_Module' | 'imageSearch_Module' | 'unlimitedTime_Module' | 'questionSearch_Module' | 'peterTV_Module';
+type SettingKey =
+  | "com.runtimedevstudios.anti-testportal+.blur"
+  | "com.runtimedevstudios.anti-testportal+.ai-solver"
+  | "com.runtimedevstudios.anti-testportal+.google-search"
+  | "com.runtimedevstudios.anti-testportal+.peter-tv"
+  | "com.runtimedevstudios.anti-testportal+.window-open";
