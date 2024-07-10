@@ -2,6 +2,21 @@ import ResponseWindow from "./UI/ResponseWindow/ResponseWindow";
 import QuestionReader from "../QuestionReader/QuestionReader";
 import DomInserter from "../DomInserter/DomInserter";
 
+interface TextSession {
+  prompt(prompt: string): Promise<string>;
+  destroy(): void;
+}
+
+interface AI {
+  createTextSession(): Promise<TextSession>;
+}
+
+declare global {
+  interface Window {
+    ai?: AI;
+  }
+}
+
 export default abstract class AISolver {
   private static window: ResponseWindow | null = null;
 
@@ -20,18 +35,33 @@ export default abstract class AISolver {
 
         DomInserter.insert(AISolver.window, parent);
 
+        if (!window.ai) {
+          AISolver.window?.displayError(
+            "Twoja przeglądarka nie obsługuje jeszcze Chrome AI API... 🤖"
+          );
+          return;
+        }
+
         const questionContent =
           QuestionReader.readQuestionText() +
           "\n" +
           QuestionReader.readAnswers();
 
-        console.log(questionContent);
-
-        setTimeout(() => {
-          AISolver.window?.displayError(
-            "Hi! I am an AI solver! I will be added soon! 🤖"
+        if (questionContent.trim() === "") {
+          this.window?.displayError(
+            "Nie mogę odczytać odpowiedzi ani pytania... 😥"
           );
-        }, 3000);
+        }
+
+        const startSession = async () => {
+          const session = await window.ai!.createTextSession();
+          const response = await session.prompt(questionContent);
+
+          this.window?.displayError(response);
+          session.destroy();
+        };
+
+        startSession();
       }
     }
   }

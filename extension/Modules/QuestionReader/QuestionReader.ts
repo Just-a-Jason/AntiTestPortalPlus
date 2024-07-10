@@ -1,42 +1,26 @@
 import { QuestionType } from "./QuestionType";
 
 export default abstract class QuestionReader {
-     
-    static readQuestionText():string  {
-        const q = document.querySelector('.question_essence');
-        return q ? q.textContent! : '';
-    }
+  public static readQuestionText(): string {
+    const q = document.querySelector(".question_essence");
+    return q ? q.textContent! : "";
+  }
 
-    static readImage():void {
-        const q = document.querySelector('.question_essence');
-        const img = q?.querySelector('img') as HTMLImageElement;
+  public static readAnswers(): string {
+    const answers = document.querySelector(".question_answers");
+    if (!answers) return "";
 
-        if (img) {
-            img.style['border'] = '4px solid #ad00ff';
-            img.style['cursor'] = 'pointer';
+    let content = "";
 
-            img.addEventListener('click', () => {
-                const search = `https://lens.google.com/search?ep=gisbubb&hl=pl&re=${encodeURIComponent(img.src)}`;
-                window.open(search, '_blank');
-            });
-        }
-    }
+    answers.childNodes.forEach((answer) => {
+      const p = (answer as HTMLElement).querySelector("p");
+      if (p) content += p.innerText + "\n";
+    });
 
-    static readAnswers(): string  {
-        const answers = document.querySelector('.question_answers');
-        if(!answers) return '';
+    return content;
+  }
 
-        let content = '';
-        
-        answers.childNodes.forEach(answer => {
-            const p = (answer as HTMLElement).querySelector('p');
-            if (p) content += p.innerText + '\n';
-        });
-
-        return content;
-    }
-
-    private static getQuestionType():QuestionType {
-        return QuestionType.SingleAnswer;
-    }
+  private static getQuestionType(): QuestionType {
+    return QuestionType.SingleAnswer;
+  }
 }
