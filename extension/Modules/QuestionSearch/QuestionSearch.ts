@@ -1,24 +1,32 @@
-export default abstract class QuestionSearch {
-    static turn(state:boolean):void {
-        if (state) {
-            const question = document.querySelector('.question_essence p') as HTMLElement;
-            if(question) {
-                question.style['color'] = '#007fff';
-                question.style['cursor'] = 'pointer';
-                question.style['fontWeight'] = 'bold';
-                question.style['fontSize'] = '20px';
+import QuestionReader from "../QuestionReader/QuestionReader";
+import { find, isTestPage } from "../Utils/Utils";
 
-                const search = encodeURI(`https://google.com/search?q=${question.textContent}`);
+export default abstract class GoogleSearch {
+  private static onClick(): void {
+    const text = QuestionReader.readQuestionText();
+    const url = encodeURI(`https://google.com/search?q=${text}`);
+    window.open(url, "_blank");
+  }
+  public static turn(state: boolean): void {
+    if (!isTestPage()) return;
 
-                question.setAttribute('search', search);
-                
-                question.addEventListener('click', (e) => {
-                    const search = (e.currentTarget as HTMLElement).getAttribute('search');
-                    if(search) {
-                        window.open(search, '_blank');
-                    }
-                });
-            }
-        }
+    const question = find(".question_essence p") as HTMLElement;
+
+    if (state) {
+      question.style["fontWeight"] = "bold";
+      question.style["cursor"] = "pointer";
+      question.style["fontSize"] = "20px";
+      question.style["color"] = "#007fff";
+
+      question.addEventListener("click", this.onClick);
+      return;
     }
+
+    question.style["fontWeight"] = "400";
+    question.style["fontSize"] = "1rem";
+    question.style["cursor"] = "text";
+    question.style["color"] = "#000";
+
+    question.removeEventListener("click", this.onClick);
+  }
 }

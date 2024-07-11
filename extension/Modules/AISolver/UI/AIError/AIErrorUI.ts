@@ -1,5 +1,5 @@
 import UIComponentProps from "../../../UI Components/Interfaces/UIComponentProps";
-import { createElement } from "../../../Helpers/HtmlHelper/HtmlHelper";
+import { createElement } from "../../../Utils/Utils";
 import UIComponent from "../../../UI Components/UIComponent";
 import "./AIErrorUI.scss";
 

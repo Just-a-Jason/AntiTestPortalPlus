@@ -1,17 +1,17 @@
 import BrowserAPI from "../../../Browser API/BrowserAPI";
-import { createElement } from "../../../Helpers/HtmlHelper/HtmlHelper";
+import { createElement } from "../../../Utils/Utils";
 import UIComponentProps from "../../../UI Components/Interfaces/UIComponentProps";
 import UIComponent from "../../../UI Components/UIComponent";
 import AISolver from "../../AISolver";
 import "./RetryButton.scss";
 
 export default class RetryButton extends UIComponent {
-  constructor() {
+  public constructor() {
     super();
     this.ready();
   }
 
-  override template(): UITemplate<UIComponentProps> {
+  protected override template(): UITemplate<UIComponentProps> {
     const button = createElement("div");
     const img = createElement("img") as HTMLImageElement;
     img.src = BrowserAPI.loadAsset("Assets/Icons/reload.svg");

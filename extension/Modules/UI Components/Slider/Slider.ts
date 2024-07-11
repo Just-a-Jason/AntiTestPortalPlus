@@ -1,10 +1,11 @@
-import { createElement } from "../../Helpers/HtmlHelper/HtmlHelper";
+import { createElement } from "../../Utils/Utils";
 import UIComponentProps from "../Interfaces/UIComponentProps";
 import AISolver from "../../AISolver/AISolver";
 import PeterTV from "../../PeterTV/PeterTV";
 import AntiBlur from "../../Blur/AntiBlur";
 import UIComponent from "../UIComponent";
 import "./Slider.scss";
+import GoogleSearch from "../../QuestionSearch/QuestionSearch";
 
 interface ISliderProps extends UIComponentProps {
   sliderSet: HTMLElement;
@@ -70,6 +71,8 @@ export default class Slider extends UIComponent<ISliderProps> {
       case "com.runtimedevstudios.anti-testportal+.ai-solver":
         AISolver.turn(this.on);
         break;
+      case "com.runtimedevstudios.anti-testportal+.google-search":
+        GoogleSearch.turn(this.on);
     }
   }
 }

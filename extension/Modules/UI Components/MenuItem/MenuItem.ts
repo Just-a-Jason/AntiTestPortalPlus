@@ -1,4 +1,4 @@
-import { createElement } from "../../Helpers/HtmlHelper/HtmlHelper";
+import { createElement } from "../../Utils/Utils";
 import UIComponentProps from "../Interfaces/UIComponentProps";
 import UIComponent from "../UIComponent";
 import "./MenuItem.scss";

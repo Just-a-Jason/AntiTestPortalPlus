@@ -1,8 +1,9 @@
 import DomInserter from "../DomInserter/DomInserter";
+import { find } from "../Utils/Utils";
 import VideoWindow from "./UI/VideoWindow";
 
 export default abstract class PeterTV {
-  private static _peterTVWindow: VideoWindow | null = null;
+  private static window: VideoWindow | null = null;
 
   static turn(state: boolean): void {
     if (state) {
@@ -11,12 +12,12 @@ export default abstract class PeterTV {
         document.URL.includes("/exam/DoStartTest.html") ||
         document.URL.includes("/exam/LoadQuestion.html")
       ) {
-        const parent = document.querySelector(".question-area") as HTMLElement;
+        const parent = find(".question-area") as HTMLElement;
         const window = new VideoWindow();
 
-        this._peterTVWindow = window;
+        this.window = window;
         DomInserter.insert(window, parent);
       }
-    } else this._peterTVWindow?.remove();
+    } else this.window?.remove();
   }
 }

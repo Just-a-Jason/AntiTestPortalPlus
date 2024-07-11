@@ -1,8 +1,5 @@
 import UIComponentProps from "../../../UI Components/Interfaces/UIComponentProps";
-import HtmlHelper, {
-  createElement,
-  parseUIComponent,
-} from "../../../Helpers/HtmlHelper/HtmlHelper";
+import { createElement, extend, removeChildren } from "../../../Utils/Utils";
 import UIComponent from "../../../UI Components/UIComponent";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 import BrowserAPI from "../../../Browser API/BrowserAPI";
@@ -17,47 +14,46 @@ interface ResponseWindowProps extends UIComponentProps {
 
 export default class ResponseWindow extends UIComponent<ResponseWindowProps> {
   protected override template(): UITemplate<ResponseWindowProps> {
-    const chatGPTResponse = createElement("div");
-    chatGPTResponse.className = "ChatGPTResponse";
+    const window = createElement("div");
+    window.className = "response-window";
 
-    const headerSection = createElement("section");
-    headerSection.className = "ChatGPTResponse__Header";
+    const header = createElement("header");
+    header.className = "response-window-header";
 
-    const imageElement = createElement("img") as HTMLImageElement;
+    const img = createElement("img") as HTMLImageElement;
 
-    imageElement.src = BrowserAPI.loadAsset("Assets/Icons/ai.svg");
+    img.src = BrowserAPI.loadAsset("Assets/Icons/ai.svg");
+    img.alt = "ai provider api logo";
+    img.draggable = false;
 
-    imageElement.alt = "chat gpt logo";
-    imageElement.className = "ChatGPTResponse__Image";
+    const p = createElement("p");
+    p.textContent = "AI Solver ✨";
 
-    const textParagraph = createElement("p");
-    textParagraph.textContent = "AI Solver ✨";
+    header.appendChild(img);
+    header.appendChild(p);
 
-    headerSection.appendChild(imageElement);
-    headerSection.appendChild(textParagraph);
-
-    const bodySection = createElement("section");
-    bodySection.className = "ChatGPTResponse__Body";
+    const body = createElement("section");
+    body.className = "response-window-body";
 
     const spinner = new LoadingSpinner();
-    bodySection.appendChild(parseUIComponent(spinner));
+    extend(body, spinner);
 
-    const footerSection = createElement("footer");
-    footerSection.className = "ChatGPTResponse__Footer";
+    const footer = createElement("footer");
+    footer.className = "response-window-footer";
 
-    const poweredByParagraph = createElement("p");
-    poweredByParagraph.textContent = "RuntimeDevStudios.com";
+    const p2 = createElement("p");
+    p2.textContent = "RuntimeDevStudios.com";
 
-    footerSection.appendChild(poweredByParagraph);
+    footer.appendChild(p2);
 
-    chatGPTResponse.appendChild(headerSection);
-    chatGPTResponse.appendChild(bodySection);
-    chatGPTResponse.appendChild(footerSection);
+    window.appendChild(header);
+    window.appendChild(body);
+    window.appendChild(footer);
 
     return {
-      element: chatGPTResponse,
+      element: window,
       structure: {
-        responseBody: bodySection,
+        responseBody: body,
         spinner: spinner,
       },
     };
@@ -66,12 +62,13 @@ export default class ResponseWindow extends UIComponent<ResponseWindowProps> {
   public displayError(text: string): void {
     if (this.body.structure?.responseBody) {
       this.body.structure.spinner = undefined;
-      const error = new AIErrorUI(text);
-      const button = new RetryButton();
 
-      HtmlHelper.removeAllChild(this.body.structure.responseBody!);
-      this.body.structure?.responseBody.appendChild(parseUIComponent(error));
-      this.body.structure?.responseBody.appendChild(parseUIComponent(button));
+      removeChildren(this.body.structure.responseBody!);
+
+      if (this.body.structure) {
+        extend(this.body.structure.responseBody, new AIErrorUI(text));
+        extend(this.body.structure.responseBody, new RetryButton());
+      }
     }
   }
 }

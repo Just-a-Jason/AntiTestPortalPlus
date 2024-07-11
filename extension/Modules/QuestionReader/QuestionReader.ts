@@ -1,13 +1,14 @@
+import { find } from "../Utils/Utils";
 import { QuestionType } from "./QuestionType";
 
 export default abstract class QuestionReader {
   public static readQuestionText(): string {
-    const q = document.querySelector(".question_essence");
+    const q = find(".question_essence") as HTMLElement;
     return q ? q.textContent! : "";
   }
 
   public static readAnswers(): string {
-    const answers = document.querySelector(".question_answers");
+    const answers = find(".question_answers") as HTMLElement;
     if (!answers) return "";
 
     let content = "";
@@ -20,7 +21,16 @@ export default abstract class QuestionReader {
     return content;
   }
 
-  private static getQuestionType(): QuestionType {
-    return QuestionType.SingleAnswer;
+  public static getQuestionType(): QuestionType {
+    const answer = find(".question_answers input") as HTMLInputElement;
+
+    switch (answer.type) {
+      case "radio":
+        return QuestionType.SingleAnswer;
+      case "checkbox":
+        return QuestionType.MultiSelection;
+      default:
+        return QuestionType.WriteAnswer;
+    }
   }
 }

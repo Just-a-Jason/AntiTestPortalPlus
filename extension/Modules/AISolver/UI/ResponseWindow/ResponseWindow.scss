@@ -2,58 +2,64 @@ $bg-color-primary: #171717;
 $bg-color-secondary: #222;
 $border-color: #464646;
 
-.ChatGPTResponse {
-    user-select: none;
+@import '../../../../Scss/utils';
+
+
+.response-window, .response-window-header, .response-window-footer {
     border-radius: 20px 20px 0px 0px ;
-    box-shadow: 2px 2px 15px #000;
+}
+
+.response-window-header, .response-window-body, .response-window-footer {
+    padding: 10px;
+}
+
+.response-window {
     background-color: $bg-color-primary;
+    box-shadow: 2px 2px 15px #000;
     font-family: monospace;
-    margin-bottom: 20px;
-    max-height: 400px;
-    margin-top: 20px;
+    user-select: none;
+    color:#fff;
+    
+    height: 400px;
     width: 250px;
 
-    &__Image {
-        height: 40px;
-        width: 40px;
-    }
+    margin-bottom: 20px;
+    margin-top: 20px;
 
-    &__Header {
+
+    &-header {
+        @extend .flex-center-row;
+
         background-color: $bg-color-secondary;
         border-bottom: 2px solid $border-color;
-        border-radius: 20px 20px 0px 0px;
         justify-content: space-evenly;
-        align-items: center;
         cursor: pointer;
         padding: 10px;
-        display: flex;
+        
+        img {
+            width: 40px;
+            height: 40px;
+        }
 
         p {
-            color: #fff;
             font-weight: bold;
             font-size: 15px;
+            color: #fff;
         }
     }
-    &__Footer {
+    
+    &-footer {
         background-color: $bg-color-secondary;
-        border-radius: 20px 20px 0px 0px;
-        font-family: monospace;
-        color:$border-color;
+        color: $border-color;
         text-align: center;
         font-weight: bold;
-        padding: 10px;
         
         * {margin: 0;}
     }
 
-    &__Body {
+    &-body {
+        @extend .flex-center-column;
         background-color: $bg-color-primary;
-        justify-content: center;
-        flex-direction: column;
-        align-items: center;
         height: 295px;
-        padding: 10px;
-        color:#fff;
-        display: flex;
     }
 }

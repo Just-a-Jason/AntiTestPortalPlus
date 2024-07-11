@@ -1,9 +1,4 @@
-import {
-  createElement,
-  load,
-  parseUIComponent,
-  save,
-} from "../../Helpers/HtmlHelper/HtmlHelper";
+import { createElement, load, parseUIComponent, save } from "../../Utils/Utils";
 import UIComponentProps from "../Interfaces/UIComponentProps";
 import BrowserAPI from "../../Browser API/BrowserAPI";
 import MenuItem from "../MenuItem/MenuItem";
