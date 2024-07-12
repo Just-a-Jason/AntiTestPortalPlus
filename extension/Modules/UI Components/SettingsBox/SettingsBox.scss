@@ -43,6 +43,18 @@
   }
 
   &-menu {
+    .settings-btn {
+      padding: 10px;
+      cursor: pointer;
+      width: 100%;
+      border: none;
+      border-radius: 10px;
+      transition: 0.2s;
+      &:hover {
+        background-color: #b7deff;
+      }
+    }
+
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     background-color: #fff;
     margin-bottom: 20px;

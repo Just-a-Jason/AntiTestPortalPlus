@@ -55,27 +55,41 @@ export default abstract class AISolver {
             const type = QuestionReader.getQuestionType();
             this.session = session;
 
-            if (type !== QuestionType.WriteAnswer) {
+            if (type === QuestionType.MultiSelection)
+              (find("input", true) as NodeListOf<HTMLInputElement>).forEach(
+                (input) => (input.checked = false)
+              );
+
+            if (type === QuestionType.WriteAnswer) {
+              const box = find("input[type='text']") as HTMLInputElement;
+              const maxChars = box.maxLength;
+
+              box.value = response.substring(0, maxChars);
+            } else {
               const labels = find(
                 "label",
                 true
               ) as NodeListOf<HTMLLabelElement>;
 
-              for (const label of labels) {
-                const isValid = await session.execute(`
-                    Napisz "true" lub "false" zależnie od tego czy odpowiedź zgadza się z tekstem. text: "${response}". odpowiedz: "${label.textContent}"
-                  `);
-                console.log(isValid);
-                if (!JSON.parse(isValid)) continue;
+              labels.forEach(async (label) => {
+                const isValid = JSON.parse(
+                  await session.execute(`
+                  Napisz "true" lub "false" zależnie od tego czy odpowiedź zgadza się z tekstem. text: "${response}". odpowiedz: "${label.textContent}"
+                `)
+                ) as boolean;
 
-                const answer = find(`#${label.htmlFor}`) as HTMLInputElement;
-                if (type === QuestionType.SingleAnswer) {
-                  answer.click();
-                  break;
-                } else if (type === QuestionType.MultiSelection) answer.click();
-              }
-            } else {
-              (find("input[type='text']") as HTMLInputElement).value = response;
+                if (isValid) {
+                  const answer = find(`#${label.htmlFor}`) as HTMLInputElement;
+                  switch (type) {
+                    case QuestionType.SingleAnswer:
+                      answer.click();
+                      return;
+                    case QuestionType.MultiSelection:
+                      answer.click();
+                      break;
+                  }
+                }
+              });
             }
 
             this.window?.displayError(response);

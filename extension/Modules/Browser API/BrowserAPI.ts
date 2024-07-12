@@ -9,6 +9,7 @@ type Browser =
 
 export default class BrowserAPI {
   private static instance: BrowserAPI = new BrowserAPI();
+  private assetsCache: Map<string, string> = new Map();
   private browser: Browser = this.getBrowser();
 
   public static loadAsset(path: string): string {
@@ -16,16 +17,25 @@ export default class BrowserAPI {
   }
 
   private loadAssetUrl(url: string): string {
+    if (this.assetsCache.has(url)) return this.assetsCache.get(url) as string;
+    let asset: string = "";
+
     switch (this.browser) {
       case "Chrome":
       case "Edge":
       case "Opera":
-        return chrome.runtime.getURL(url);
+        asset = chrome.runtime.getURL(url);
+        this.assetsCache.set(url, asset);
+        break;
       case "Mozilla Firefox":
-        browser.runtime.getURL(url);
+        asset = browser.runtime.getURL(url);
+        this.assetsCache.set(url, asset);
+        break;
       default:
         throw new Error(`${this.browser} your browser is not supported.`);
     }
+
+    return asset as string;
   }
 
   private getBrowser(): Browser {

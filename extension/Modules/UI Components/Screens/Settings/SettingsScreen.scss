@@ -1,0 +1,54 @@
+@import '../../../../Scss/utils';
+$transition: 0.5s;
+
+.settings-screen {
+    @extend .flex-center-column;
+    user-select: none;
+
+    transition: $transition;
+    position: fixed;
+    height: 100vh;
+    z-index: 999;
+    width: 100vw;
+    inset: 0;
+    
+    &-content {
+        box-shadow: 1px 1px 10px #000;
+        background-color: #f2f3f4;
+        border: solid 3px #e3e3e3;
+        transform: translateY(120vh);
+        border-radius: 10px;
+        transition: $transition;
+        padding: 15px;
+        height: 90%;
+        width: 80%;
+
+        h1 {
+            @extend .flex-center-row;
+            border-bottom: 2px solid #e3e3e3;
+            justify-content:space-between;
+            padding-bottom: 10px;
+            font-weight: normal;
+            color: #9d9d9d;
+
+            img {
+                cursor: pointer;
+            }
+        }
+    }
+    
+    .settings-content-screen {
+        background-color: #e3e3e3;
+        border: solid 2px #d9d6d6;
+        border-radius: 10px;
+        width: 100%;
+        height: 80%;
+    }
+
+    &.visible {
+        background-color: #0000005e;
+        .settings-screen-content {
+            transform: translateY(0);
+        }
+    }
+}

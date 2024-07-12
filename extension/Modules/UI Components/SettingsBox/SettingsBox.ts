@@ -1,4 +1,10 @@
-import { createElement, load, parseUIComponent, save } from "../../Utils/Utils";
+import {
+  createElement,
+  extend,
+  load,
+  parseUIComponent,
+  save,
+} from "../../Utils/Utils";
 import UIComponentProps from "../Interfaces/UIComponentProps";
 import BrowserAPI from "../../Browser API/BrowserAPI";
 import MenuItem from "../MenuItem/MenuItem";
@@ -10,6 +16,7 @@ import AntiBlur from "../../Blur/AntiBlur";
 import AISolver from "../../AISolver/AISolver";
 import PeterTV from "../../PeterTV/PeterTV";
 import GoogleSearch from "../../QuestionSearch/QuestionSearch";
+import SettingsScreen from "../Screens/Settings/SettingsScreen";
 
 interface MenuItemData {
   defaultValue: any;
@@ -51,9 +58,22 @@ export default class SettingsBox extends UIComponent<SliderProps> {
     });
 
     if (this.get("com.runtimedevstudios.anti-testportal+.window-open")) {
-      menu.classList.add("visible");
-      this.visible = true;
+      setTimeout(() => {
+        menu.classList.add("visible");
+        this.visible = true;
+      }, 100);
     }
+
+    const btn = createElement("button") as HTMLButtonElement;
+    btn.textContent = "Settings 🛠️";
+    const item = new MenuItem("");
+    item.appendChild(btn);
+    extend(menu, item);
+    btn.classList.add("settings-btn");
+
+    btn.addEventListener("click", () => {
+      extend(document.body, new SettingsScreen());
+    });
 
     return {
       element: box,
