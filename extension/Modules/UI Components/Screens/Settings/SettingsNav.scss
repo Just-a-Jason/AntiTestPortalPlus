@@ -7,10 +7,15 @@
     text-align: right;
     padding: 10px;
     width: 50%;
+
+    .route {
+      cursor: pointer;
+    }
   }
 
   ul {
     @extend .flex-center-row;
+    flex-wrap: wrap;
     justify-content: left;
     list-style: none;
     padding: 10px;

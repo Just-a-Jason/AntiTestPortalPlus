@@ -10,7 +10,7 @@
         "https://*.testportal.net/*",
         "https://www.testportal.pl/exam/*"
       ],
-      "js": ["index.js"],
+      "js": ["Assets/index.js"],
       "all_frames": true
     }
   ],
@@ -23,5 +23,5 @@
     "48": "icons/antitestportal48.png",
     "128": "icons/antitestportal128.png"
   },
-  "web_accessible_resources": [ "Assets/*" ]
+  "web_accessible_resources": [ "Assets/*", "public/*" ]
 }

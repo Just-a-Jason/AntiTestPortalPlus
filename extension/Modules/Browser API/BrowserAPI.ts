@@ -8,9 +8,11 @@ type Browser =
   | "Unknown";
 
 export default class BrowserAPI {
-  private static instance: BrowserAPI = new BrowserAPI();
+  public static instance: BrowserAPI = new BrowserAPI();
   private assetsCache: Map<string, string> = new Map();
   private browser: Browser = this.getBrowser();
+
+  private totalBits = 0;
 
   public static loadAsset(path: string): string {
     return this.instance.loadAssetUrl(path);
@@ -51,5 +53,16 @@ export default class BrowserAPI {
     else if (userAgent.includes("Safari")) return "Apple Safari";
 
     return "Unknown";
+  }
+
+  public getCacheSize(): Promise<string> {
+    this.assetsCache.forEach(async (v) => {
+      const response = await fetch(v);
+
+      if (response.ok) {
+        const size = (await response.text()).length;
+      }
+    });
+    return new Promise((resolve) => resolve(""));
   }
 }

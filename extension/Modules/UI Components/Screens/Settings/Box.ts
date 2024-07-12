@@ -1,5 +1,5 @@
 import BrowserAPI from "../../../Browser API/BrowserAPI";
-import { createElement, extend } from "../../../Utils/Utils";
+import { createElement, extend, save } from "../../../Utils/Utils";
 import UIComponentProps from "../../Interfaces/UIComponentProps";
 import SettingsContentScreen from "./SettingsContentScreen";
 import SettingsScreen from "./SettingsScreen";
@@ -17,6 +17,7 @@ export default class Box extends UIComponent {
 
     const onClick = () => {
       SettingsScreen.instance?.getBody().element.classList.remove("visible");
+      save("com.runtimedevstudios.anti-testportal+.settings.open", false);
 
       setTimeout(() => SettingsScreen.instance?.remove(), 600);
     };

@@ -22,7 +22,12 @@ export const parseUIComponent = (component: UIComponent): HTMLElement => {
 export const load = (key: SettingKey): any => {
   const v = localStorage.getItem(key);
   if (!v) return false;
-  return JSON.parse(v);
+
+  try {
+    return JSON.parse(v);
+  } catch {
+    return v;
+  }
 };
 
 export const save = (key: SettingKey, value: any) =>

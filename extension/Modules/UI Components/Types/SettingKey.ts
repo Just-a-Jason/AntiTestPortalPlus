@@ -3,4 +3,6 @@ type SettingKey =
   | "com.runtimedevstudios.anti-testportal+.ai-solver"
   | "com.runtimedevstudios.anti-testportal+.google-search"
   | "com.runtimedevstudios.anti-testportal+.peter-tv"
-  | "com.runtimedevstudios.anti-testportal+.window-open";
+  | "com.runtimedevstudios.anti-testportal+.window-open"
+  | "com.runtimedevstudios.anti-testportal+.settings.open"
+  | "com.runtimedevstudios.anti-testportal+.settings.route";

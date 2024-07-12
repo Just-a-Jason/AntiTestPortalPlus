@@ -30,6 +30,27 @@ interface SliderProps extends UIComponentProps {
 export default class SettingsBox extends UIComponent<SliderProps> {
   private visible: boolean = false;
 
+  private showSettings(): void {
+    const screen = new SettingsScreen();
+    extend(document.body, screen);
+
+    if (
+      !localStorage.getItem(
+        "com.runtimedevstudios.anti-testportal+.settings.route"
+      )
+    )
+      save(
+        "com.runtimedevstudios.anti-testportal+.settings.route",
+        "System ⚙️"
+      );
+
+    screen.updatePath(
+      load("com.runtimedevstudios.anti-testportal+.settings.route")
+    );
+
+    save("com.runtimedevstudios.anti-testportal+.settings.open", true);
+  }
+
   protected override template(): UITemplate<SliderProps> {
     const box = createElement("div");
     box.classList.add("settings-box");
@@ -71,9 +92,7 @@ export default class SettingsBox extends UIComponent<SliderProps> {
     extend(menu, item);
     btn.classList.add("settings-btn");
 
-    btn.addEventListener("click", () => {
-      extend(document.body, new SettingsScreen());
-    });
+    btn.addEventListener("click", this.showSettings);
 
     return {
       element: box,
@@ -131,6 +150,9 @@ export default class SettingsBox extends UIComponent<SliderProps> {
     AntiBlur.turn(this.get("com.runtimedevstudios.anti-testportal+.blur"));
     AISolver.turn(this.get("com.runtimedevstudios.anti-testportal+.ai-solver"));
     PeterTV.turn(this.get("com.runtimedevstudios.anti-testportal+.peter-tv"));
+
+    if (this.get("com.runtimedevstudios.anti-testportal+.settings.open"))
+      this.showSettings();
 
     this.loadSliders();
   }

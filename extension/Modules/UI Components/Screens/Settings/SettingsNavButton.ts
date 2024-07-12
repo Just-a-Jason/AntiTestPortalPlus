@@ -1,4 +1,4 @@
-import { createElement, find } from "../../../Utils/Utils";
+import { createElement, find, save } from "../../../Utils/Utils";
 import UIComponentProps from "../../Interfaces/UIComponentProps";
 import UIComponent from "../../UIComponent";
 import SettingsScreen from "./SettingsScreen";
@@ -8,9 +8,13 @@ interface Props extends UIComponentProps {
 }
 
 export default class SettingsNavButton extends UIComponent {
-  public constructor(private text: string) {
+  public constructor(private path: string) {
     super();
+
+    const routes = path.trim().split(">");
+    const text = routes[routes.length - 1].trim();
     (this.body.structure!.text! as HTMLParagraphElement).textContent = text;
+
     this.body.element.title = `${text} settings.`;
   }
 
@@ -23,14 +27,12 @@ export default class SettingsNavButton extends UIComponent {
 
     li.addEventListener("click", (e) => {
       const item = find(".settings-item.active");
+      save("com.runtimedevstudios.anti-testportal+.settings.route", this.path);
 
       if (item) (item as HTMLElement).classList.remove("active");
       (e.currentTarget! as HTMLElement).classList.add("active");
-      console.log(SettingsScreen.instance);
 
-      SettingsScreen.instance?.updatePath(
-        `System > Settings 🛠️ > ${this.text}`
-      );
+      SettingsScreen.instance?.updatePath(`${this.path}`);
     });
 
     return {
