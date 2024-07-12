@@ -4,13 +4,10 @@
   @extend .flex-center-row;
 
   .nav-path {
+    color: #9d9d9d;
     text-align: right;
     padding: 10px;
     width: 50%;
-
-    .route {
-      cursor: pointer;
-    }
   }
 
   ul {
@@ -44,7 +41,7 @@
   }
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 800px) {
   .settings-nav {
     flex-direction: column-reverse;
     .nav-path {
@@ -54,5 +51,8 @@
     ul {
       width: 100%;
     }
+  }
+  .settings-screen-content {
+    height: 80vh;
   }
 }

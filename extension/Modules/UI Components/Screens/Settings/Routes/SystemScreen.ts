@@ -1,11 +1,13 @@
 import BrowserAPI from "../../../../Browser API/BrowserAPI";
-import { createElement } from "../../../../Utils/Utils";
+import { createElement, extend } from "../../../../Utils/Utils";
 import UIComponentProps from "../../../Interfaces/UIComponentProps";
+import SystemStatistic from "../../../SystemStatistic/SystemStatistic";
 import UIComponent from "../../../UIComponent";
 
 export default class SystemScreen extends UIComponent {
   protected template(): UITemplate<UIComponentProps> {
-    const size = async () => {
+    const start = performance.now();
+    const fetchData = async () => {
       const url = BrowserAPI.loadAsset("Assets/index.js");
 
       const response = await fetch(url, {
@@ -13,50 +15,56 @@ export default class SystemScreen extends UIComponent {
       });
 
       if (response.ok) {
-        const size = Math.ceil((await response.text()).length / 1024);
-
-        p.textContent = `${size} KB`;
-        p.appendChild(img);
+        const size = Math.ceil((await response.text()).length / 1024) + " KB";
+        bundle.setText(size);
       }
+
+      cache.setText(await BrowserAPI.instance.calculateCacheSize());
+
+      perf.setText((performance.now() - start).toFixed(3) + " ms");
     };
 
     const box = createElement("div");
-    const h3 = createElement("h3");
-    h3.textContent = "JS bundle size";
 
-    const h32 = createElement("h3");
-    h32.textContent = "Cached resources size";
+    const cache = new SystemStatistic(
+      "Assets/Icons/cache.svg",
+      "Cached assets size",
+      "Calculating cache size..."
+    );
 
-    const p = createElement("p");
-    p.classList.add("system-statistic");
+    const bundle = new SystemStatistic(
+      "Assets/Icons/js.svg",
+      "JS bundle size",
+      "Loading bundle size..."
+    );
 
-    const img = createElement("img") as HTMLImageElement;
-    img.src = BrowserAPI.loadAsset("Assets/Icons/js.svg");
-    img.draggable = false;
+    const version = new SystemStatistic(
+      "Assets/Icons/version.svg",
+      "App Version",
+      "1.0.0"
+    );
 
-    const p2 = createElement("p");
-    p2.classList.add("system-statistic");
+    const perf = new SystemStatistic(
+      "Assets/Icons/timer.svg",
+      "Render performance",
+      "Calculaing performance..."
+    );
 
-    const img2 = createElement("img") as HTMLImageElement;
+    extend(box, bundle);
+    extend(box, cache);
+    extend(box, perf);
 
-    img2.src = BrowserAPI.loadAsset("Assets/Icons/cache.svg");
-    img2.draggable = false;
+    extend(
+      box,
+      new SystemStatistic(
+        "Assets/Icons/figa.png",
+        "GUI engine",
+        "Figa (custom engine)"
+      )
+    );
 
-    const cacheSize = async () => {
-      let totalBits = 0;
-      p2.textContent = totalBits + " KB";
-      p2.appendChild(img2);
-    };
-
-    box.appendChild(h3);
-    box.appendChild(p);
-    box.appendChild(h32);
-    box.appendChild(p2);
-
-    size();
-    cacheSize();
-
-    BrowserAPI.instance.getCacheSize();
+    extend(box, version);
+    fetchData();
 
     return { element: box };
   }
