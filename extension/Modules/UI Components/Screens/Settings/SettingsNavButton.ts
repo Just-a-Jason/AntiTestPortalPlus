@@ -1,4 +1,4 @@
-import { createElement, find, load, save } from "../../../Utils/Utils";
+import { createElement, exists, find, load, save } from "../../../Utils/Utils";
 import UIComponentProps from "../../Interfaces/UIComponentProps";
 import UIComponent from "../../UIComponent";
 import SettingsScreen from "./SettingsScreen";
@@ -14,11 +14,8 @@ export default class SettingsNavButton extends UIComponent {
     const routes = path.trim().split(">");
     const text = routes[routes.length - 1].trim();
     (this.body.structure!.text! as HTMLParagraphElement).textContent = text;
-    if (
-      localStorage.getItem(
-        "com.runtimedevstudios.anti-testportal+.settings.route"
-      )
-    ) {
+
+    if (exists("com.runtimedevstudios.anti-testportal+.settings.route")) {
       const route = load(
         "com.runtimedevstudios.anti-testportal+.settings.route"
       );
@@ -27,6 +24,7 @@ export default class SettingsNavButton extends UIComponent {
         this.body.element.classList.add("active");
       }
     }
+
     this.body.element.title = `${text} settings.`;
   }
 

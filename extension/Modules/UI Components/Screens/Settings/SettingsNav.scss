@@ -53,6 +53,9 @@
     }
   }
   .settings-screen-content {
-    height: 80vh;
+    min-height: 80vh;
+  }
+  .system-statistic {
+    width: 100%;
   }
 }

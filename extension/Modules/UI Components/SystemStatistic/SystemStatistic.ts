@@ -10,19 +10,34 @@ interface Props extends UIComponentProps {
 }
 export default class SystemStatistic extends UIComponent {
   constructor(
-    private image: string,
-    private headerText: string,
-    private content: string
+    image: string,
+    headerText: string,
+    public content: string,
+    private editable: boolean = false
   ) {
     super();
 
     if (this.body.structure) {
       const { header, img, p } = this.body.structure!;
-      (p as HTMLParagraphElement).textContent = content;
       (header as HTMLHeadingElement).textContent = headerText;
 
       const url = BrowserAPI.loadAsset(image);
       (img as HTMLImageElement).src = url;
+
+      if (editable) {
+        const input = createElement("input") as HTMLInputElement;
+        input.type = "text";
+
+        input.value = content;
+
+        input.addEventListener("change", (e) => {
+          this.content = (e.currentTarget as HTMLInputElement).value;
+        });
+
+        (p as HTMLElement).appendChild(input);
+      } else {
+        (p as HTMLParagraphElement).textContent = content;
+      }
 
       (p as HTMLParagraphElement).appendChild(img as HTMLImageElement);
     }
@@ -54,6 +69,12 @@ export default class SystemStatistic extends UIComponent {
   }
 
   public setText(text: string) {
+    if (this.editable) {
+      (this.body.element.querySelector("input") as HTMLInputElement).value =
+        text;
+      return;
+    }
+
     const { p, img } = this.body.structure!;
 
     (p as HTMLParagraphElement).textContent = text;

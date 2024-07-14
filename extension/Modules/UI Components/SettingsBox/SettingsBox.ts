@@ -1,5 +1,6 @@
 import {
   createElement,
+  exists,
   extend,
   load,
   parseUIComponent,
@@ -17,6 +18,7 @@ import AISolver from "../../AISolver/AISolver";
 import PeterTV from "../../PeterTV/PeterTV";
 import GoogleSearch from "../../QuestionSearch/QuestionSearch";
 import SettingsScreen from "../Screens/Settings/SettingsScreen";
+import { AIProvider } from "../Screens/Settings/Routes/AIProviders";
 
 interface MenuItemData {
   defaultValue: any;
@@ -34,11 +36,7 @@ export default class SettingsBox extends UIComponent<SliderProps> {
     const screen = new SettingsScreen();
     extend(document.body, screen);
 
-    if (
-      !localStorage.getItem(
-        "com.runtimedevstudios.anti-testportal+.settings.route"
-      )
-    )
+    if (!exists("com.runtimedevstudios.anti-testportal+.settings.route"))
       save(
         "com.runtimedevstudios.anti-testportal+.settings.route",
         "System ⚙️"

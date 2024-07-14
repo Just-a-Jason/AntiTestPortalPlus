@@ -7,9 +7,9 @@ import {
 import UIComponentProps from "../../Interfaces/UIComponentProps";
 import UIComponent from "../../UIComponent";
 import "./SettingsScreen.scss";
-import Box from "./Box";
 import Router from "../../../Router/Router";
 import { routes } from "./Routes";
+import Box from "./Box";
 
 export default class SettingsScreen extends UIComponent {
   public static instance: SettingsScreen | null = null;

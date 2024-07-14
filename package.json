@@ -11,8 +11,10 @@
   "license": "ISC",
   "dependencies": {
     "@types/chrome": "^0.0.253",
+    "@types/crypto-js": "^4.2.2",
     "@types/firefox-webext-browser": "^120.0.0",
     "@types/node": "^20.8.7",
+    "crypto-js": "^4.2.0",
     "sass": "^1.70.0",
     "ts-loader": "^9.5.0",
     "tsc-loader": "^1.0.4",

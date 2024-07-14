@@ -1,1 +1,4 @@
-type UITemplate<T extends object> = { element: HTMLElement; structure?: T; };
+type UITemplate<T extends object> = {
+  element: HTMLElement;
+  structure?: T;
+};

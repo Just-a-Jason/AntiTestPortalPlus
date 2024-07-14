@@ -1,9 +1,10 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "forceConsistentCasingInFileNames": true,         
-    "skipLibCheck": true,                                
-    "module": "ES6",                                
-    "strict": true,                                     
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "module": "ES6",
+    "strict": true,
+    "moduleResolution": "node"
   }
 }

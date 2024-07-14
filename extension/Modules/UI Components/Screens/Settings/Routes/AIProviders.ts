@@ -1,4 +1,4 @@
-export const enum AIProviders {
+export const enum AIProvider {
   ChatGPT = "Chat GPT",
-  ChromeAIAPI = "Chrome API",
+  ChromeAPI = "Chrome API",
 }

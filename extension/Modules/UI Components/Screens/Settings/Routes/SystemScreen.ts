@@ -50,20 +50,18 @@ export default class SystemScreen extends UIComponent {
       "Calculaing performance..."
     );
 
+    const gui = new SystemStatistic(
+      "Assets/Icons/figa.png",
+      "GUI engine",
+      "Figa"
+    );
+
     extend(box, bundle);
     extend(box, cache);
     extend(box, perf);
-
-    extend(
-      box,
-      new SystemStatistic(
-        "Assets/Icons/figa.png",
-        "GUI engine",
-        "Figa (custom engine)"
-      )
-    );
-
+    extend(box, gui);
     extend(box, version);
+
     fetchData();
 
     return { element: box };
